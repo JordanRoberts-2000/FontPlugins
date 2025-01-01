@@ -4,5 +4,12 @@ import fontPlugin from "@strawr/vite-font-plugin";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), fontPlugin()],
+  plugins: [
+    react(),
+    fontPlugin([
+      {
+        font: "ABeeZee",
+      },
+    ]),
+  ],
 });

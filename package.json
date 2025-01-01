@@ -3,9 +3,16 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "update": "cd packages/viteFontPlugin && npm run build && yalc publish && cd ../../playground/react && yalc add @strawr/vite-font-plugin"
+    "update": "cd packages/viteFontPlugin && npm run build && yalc publish && cd ../../playground/react && yalc add @strawr/vite-font-plugin",
+    "genTypes": "tsx scripts/generatePluginConfigType.ts"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
 }
