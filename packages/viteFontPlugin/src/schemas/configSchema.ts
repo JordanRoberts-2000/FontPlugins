@@ -22,6 +22,9 @@ const FontPluginConfigSchema = z.object({
       z.string().refine((fontName) => fontData.some((font) => font.family === fontName.replace(/\s+/g, '_')), {message: "Invalid font-family"}),
       z.object({
         font: z.string().refine((fontName) => fontData.some((font) => font.family === fontName.replace(/\s+/g, '_')), {message: "Invalid font-family"}),
+        preload: z.boolean().optional(),
+        cssVariable: z.string()
+        .transform((varName) => (varName.startsWith("--") ? varName : "--" + varName)).optional(),
       }),
     ])
   ),
