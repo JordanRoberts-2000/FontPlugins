@@ -3,6 +3,14 @@ import fs from "fs";
 const googleFontsMetaDataUrl = "https://fonts.google.com/metadata/fonts";
 const viteFontPluginConfigTypePath =
   "packages/viteFontPlugin/src/types/pluginConfigType.ts";
+const ignoredSubsets = [
+  "menu",
+  "japanese",
+  "korean",
+  "chinese-simplified",
+  "chinese-hongkong",
+  "chinese-traditional",
+];
 
 const response = await fetch(googleFontsMetaDataUrl);
 if (!response.ok) {
@@ -28,16 +36,8 @@ if (!familyMetaDataJSON) {
   );
 }
 
-const ignoredSubsets = [
-  "menu",
-  "japanese",
-  "korean",
-  "chinese-simplified",
-  "chinese-hongkong",
-  "chinese-traditional",
-];
-
-let FontPluginConfigContent = "";
+let fontConfigType = "";
+let fontTitlesType = "";
 
 familyMetaDataJSON.forEach(({ family, subsets, fonts, axes }) => {
   const weights = Object.keys(fonts).filter((key) => !key.includes("i"));
@@ -48,7 +48,9 @@ familyMetaDataJSON.forEach(({ family, subsets, fonts, axes }) => {
     (subset) => !ignoredSubsets.includes(subset)
   );
 
-  FontPluginConfigContent += `
+  fontTitlesType += `| "${family}"\n`;
+
+  fontConfigType += `
     | {
         font: "${family}",
         className?: string,
@@ -85,7 +87,15 @@ import { entireMetricsCollection } from "@capsizecss/metrics/entireMetricsCollec
 
 type FallbackFont = keyof typeof entireMetricsCollection;
 
-export type FontPluginConfig = Array<${FontPluginConfigContent}>
+export type FontPluginConfig = {
+  config?: {
+    css?: "inlineHead" | "buildFile",
+    selfHost?: boolean,
+    defaultPreload?: boolean,
+    defaultDisplay?: "auto" | "block" | "swap" | "fallback" | "optional",
+  },
+  fonts: Array<${fontConfigType} ${fontTitlesType}>
+}
 `;
 
 try {
