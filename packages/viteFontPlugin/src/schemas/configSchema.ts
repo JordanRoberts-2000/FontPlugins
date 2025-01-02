@@ -1,4 +1,5 @@
 import { z } from "zod";
+import fontData from "./fontData.json" with { type: "json" };
 
 const FontPluginConfigSchema = z.object({
   config: z
@@ -18,9 +19,9 @@ const FontPluginConfigSchema = z.object({
     }),
   fonts: z.array(
     z.union([
-      z.string(),
+      z.string().refine((fontName) => fontData.some((font) => font.family === fontName.replace(/\s+/g, '_')), {message: "Invalid font-family"}),
       z.object({
-        font: z.string(),
+        font: z.string().refine((fontName) => fontData.some((font) => font.family === fontName.replace(/\s+/g, '_')), {message: "Invalid font-family"}),
       }),
     ])
   ),

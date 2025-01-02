@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     fontPlugin({
-      fonts: [],
+      fonts: ["AR One Sans"],
     }),
   ],
 });
