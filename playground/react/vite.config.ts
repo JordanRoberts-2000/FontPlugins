@@ -6,12 +6,8 @@ import fontPlugin from "@strawr/vite-font-plugin";
 export default defineConfig({
   plugins: [
     react(),
-    fontPlugin([
-      {
-        font: "ADLaM Display",
-        modifiedFallback: false,
-        customFallback: "",
-      },
-    ]),
+    fontPlugin({
+      fonts: [],
+    }),
   ],
 });

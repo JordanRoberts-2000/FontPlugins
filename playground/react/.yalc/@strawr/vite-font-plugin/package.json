@@ -17,7 +17,9 @@
   "license": "ISC",
   "dependencies": {
     "@capsizecss/core": "^4.1.2",
-    "@capsizecss/metrics": "^3.2.0"
+    "@capsizecss/metrics": "^3.2.0",
+    "chalk": "^5.4.1",
+    "zod": "^3.24.1"
   },
-  "yalcSig": "c5ad05a70f586dfb75e2e17c7ad9e5a3"
+  "yalcSig": "a263adaee3e167091d3f4e0d634ef7c8"
 }

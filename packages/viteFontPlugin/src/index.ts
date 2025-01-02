@@ -1,17 +1,26 @@
 import type { Plugin } from "vite";
-import { FontPluginConfig } from "./types/pluginConfigType";
-import addPreconnectLinks from "./utils/addPreconnectLinks.js";
+import type { FontPluginConfig } from "./types/pluginConfigType.js";
+import addPreconnectLinks from "./utils/htmlGen/addPreconnectLinks.js";
+import modifyConfig from "./utils/modifyConfig.js";
+import FontPluginConfigSchema from "./schemas/configSchema.js";
+import chalk from "chalk";
 
 export default function fontPlugin(config: FontPluginConfig): Plugin {
+  const validConfig = FontPluginConfigSchema.safeParse(config);
+  if (!validConfig.success) {
+    validConfig.error.errors.map((error) => {
+      console.error(
+        chalk.bgRed.white(
+          `[@strawr/vite-font-plugin] - Validation Error: ${error.message}`
+        )
+      );
+    });
+    throw new Error("FontPlugin: Failed to validate provided config object");
+  }
   return {
     name: "vite-font-plugin",
     config() {
-      // fontName replace spaces
-      // resolve if subset is "all" or undefined
-      // resolve if weight & italic weight is undefined
-      // add -- to css variables if not included
-      console.log("env: ", process.env.NODE_ENV);
-      console.log("config: ", config);
+      config = modifyConfig(config);
     },
     transformIndexHtml(html) {
       if (process.env.NODE_ENV === "development") {
@@ -28,6 +37,7 @@ export default function fontPlugin(config: FontPluginConfig): Plugin {
       if (process.env.NODE_ENV === "production") {
         // add link to css file
         // add preloads
+        return html;
       }
     },
 
