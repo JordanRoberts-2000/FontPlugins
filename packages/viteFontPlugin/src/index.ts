@@ -3,17 +3,13 @@ import type { FontPluginConfig } from "./types/pluginConfigType.js";
 import addPreconnectLinks from "./utils/htmlGen/addPreconnectLinks.js";
 import modifyConfig from "./utils/modifyConfig.js";
 import FontPluginConfigSchema from "./schemas/configSchema.js";
-import chalk from "chalk";
+import PluginLog from "./utils/logging.js";
 
 export default function fontPlugin(config: FontPluginConfig): Plugin {
   const validConfig = FontPluginConfigSchema.safeParse(config);
   if (!validConfig.success) {
     validConfig.error.errors.map((error) => {
-      console.error(
-        chalk.bgRed.white(
-          `[@strawr/vite-font-plugin] - Validation Error: ${error.message}`
-        )
-      );
+      PluginLog.error(`Validation Failed: ${error.message}`);
     });
     throw new Error("FontPlugin: Failed to validate provided config object");
   }
