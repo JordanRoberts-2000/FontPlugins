@@ -15,5 +15,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "yalcSig": "7c01a9a93695c928e076267508dbb4c4"
+  "dependencies": {
+    "@capsizecss/core": "^4.1.2",
+    "@capsizecss/metrics": "^3.2.0"
+  },
+  "yalcSig": "c5ad05a70f586dfb75e2e17c7ad9e5a3"
 }
