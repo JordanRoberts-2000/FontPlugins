@@ -6,6 +6,7 @@ const FontPluginConfigSchema = z.object({
     .object({
       selfHost: z.boolean().default(true),
       css: z.enum(["inlineHead", "buildFile"]).default("buildFile"),
+      includeItalicsByDefault: z.boolean().default(true),
       defaultPreload: z.boolean().default(false),
       defaultDisplay: z
         .enum(["auto", "block", "swap", "fallback", "optional"])
@@ -25,6 +26,10 @@ const FontPluginConfigSchema = z.object({
         preload: z.boolean().optional(),
         cssVariable: z.string()
         .transform((varName) => (varName.startsWith("--") ? varName : "--" + varName)).optional(),
+        className: z.string().optional(),
+        customFallback: z.string().optional(),
+        display: z.enum(["auto", "block", "swap", "fallback", "optional"]).optional(),
+        modifiedFallback: z.boolean().optional(),
       }),
     ])
   ),

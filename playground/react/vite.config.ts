@@ -7,7 +7,15 @@ export default defineConfig({
   plugins: [
     react(),
     fontPlugin({
-      fonts: ["AR One Sans"],
+      fonts: [
+        {
+          font: "Inter",
+          weight: { from: "400", to: "800" },
+          italic: { from: "100", to: "300" },
+          axes: ["opsz", "wght"],
+          subsets: ["greek-ext"],
+        },
+      ],
     }),
   ],
 });

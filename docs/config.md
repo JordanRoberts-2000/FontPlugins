@@ -9,7 +9,7 @@
 
 - font: google font name.
 - className?: adds generated font family to the classname.
-- cssVariable?: adds generated font family to the css variable.
+- cssVariable?: adds generated font family to the css variable. appends -- if not included
 - variableFont?: use variable font.
 - preload?: adds preload tag into the head for this font.
 - modifiedFallback?: adds modified (stretched font) fallback to prevent layout shift.
