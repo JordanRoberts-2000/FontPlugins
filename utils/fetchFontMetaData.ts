@@ -1,6 +1,7 @@
 import { z } from "zod";
 import attemptFetch from "./attemptFetch.js";
-import { errorPrefix } from "../scripts/processGoogleFontUrl.js";
+
+const errorPrefix = "[Script - GeneratePluginConfigType]";
 
 export default async function fetchFontMetaData(url: string) {
   const fontsMetaDataJSON = await attemptFetch({

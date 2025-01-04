@@ -7,17 +7,15 @@
   "scripts": {
     "update": "cd packages/viteFontPlugin && npm run build && yalc publish && cd ../../playground/react && yalc add @strawr/vite-font-plugin",
     "updateFontData": "tsx scripts/processGoogleFontUrl.ts",
-    "test": "jest --maxWorkers=1"
+    "test": "vitest"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.3",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.2.5",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
     "zod": "^3.24.1"
   }
 }

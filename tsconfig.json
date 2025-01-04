@@ -1,6 +1,14 @@
 {
   "compilerOptions": {
-    "module": "NodeNext"
+    "types": ["vitest/globals"],
+    "target": "es2020",
+    "module": "node16",
+    "strict": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "verbatimModuleSyntax": true
   },
-  "include": ["scripts"]
+  "include": ["scripts", "utils", "tests"],
+  "exclude": ["node_modules"]
 }

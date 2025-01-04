@@ -1,23 +1,24 @@
-import attemptFetch from "../../utils/attemptFetch";
+import type { Mock } from "vitest";
+import attemptFetch from "../../utils/attemptFetch.js";
 
 describe("attemptFetch", () => {
   const originalFetch = global.fetch;
-  jest.useFakeTimers();
 
   beforeEach(() => {
-    jest.clearAllMocks();
-    global.fetch = jest.fn();
+    vi.useFakeTimers();
+    vi.clearAllMocks();
+    global.fetch = vi.fn();
   });
 
-  afterAll(() => {
+  afterEach(() => {
     global.fetch = originalFetch;
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   describe("Fetching", () => {
     it("should successfully fetch raw response", async () => {
       const mockResponse = new Response("raw data");
-      (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
+      (global.fetch as Mock).mockResolvedValueOnce(mockResponse);
 
       const result = await attemptFetch({
         url: "https://api.example.com/data",
@@ -32,7 +33,7 @@ describe("attemptFetch", () => {
       const mockErrorResponse = new Response("", { status: 500 });
       const mockSuccessResponse = new Response(JSON.stringify(mockData));
 
-      (global.fetch as jest.Mock)
+      (global.fetch as Mock)
         .mockResolvedValueOnce(mockErrorResponse)
         .mockResolvedValueOnce(mockErrorResponse)
         .mockResolvedValueOnce(mockSuccessResponse);
@@ -46,23 +47,18 @@ describe("attemptFetch", () => {
 
       // Handle each retry cycle
       for (let i = 0; i < 2; i++) {
-        // Use jest.runAllTimers() to handle all pending timers
-        jest.runAllTimers();
-        // Allow any pending promises to resolve
+        vi.runAllTimers();
         await Promise.resolve();
-        // Allow the next tick of promises to resolve
         await Promise.resolve();
       }
 
-      // Run any remaining timers
-      jest.runAllTimers();
+      vi.runAllTimers();
 
-      // Wait for the final result
       const result = await resultPromise;
 
       expect(result).toEqual(mockData);
       expect(global.fetch).toHaveBeenCalledTimes(3);
-      expect(jest.getTimerCount()).toBe(0);
+      expect(vi.getTimerCount()).toBe(0);
     });
   });
 
@@ -70,7 +66,7 @@ describe("attemptFetch", () => {
     it("should successfully fetch and parse JSON", async () => {
       const mockData = { hello: "world" };
       const mockResponse = new Response(JSON.stringify(mockData));
-      (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
+      (global.fetch as Mock).mockResolvedValueOnce(mockResponse);
 
       const result = await attemptFetch({
         url: "https://api.example.com/data",
@@ -84,7 +80,7 @@ describe("attemptFetch", () => {
     it("should successfully fetch and parse text", async () => {
       const mockText = "Hello World";
       const mockResponse = new Response(mockText);
-      (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
+      (global.fetch as Mock).mockResolvedValueOnce(mockResponse);
 
       const result = await attemptFetch({
         url: "https://api.example.com/text",
@@ -98,7 +94,7 @@ describe("attemptFetch", () => {
     it("should successfully fetch and parse blob", async () => {
       const mockBlob = new Blob(["test data"], { type: "text/plain" });
       const mockResponse = new Response(mockBlob);
-      (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
+      (global.fetch as Mock).mockResolvedValueOnce(mockResponse);
 
       const result = await attemptFetch({
         url: "https://api.example.com/blob",
@@ -112,7 +108,7 @@ describe("attemptFetch", () => {
     it("should successfully fetch and parse arrayBuffer", async () => {
       const mockBuffer = new ArrayBuffer(8);
       const mockResponse = new Response(mockBuffer);
-      (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
+      (global.fetch as Mock).mockResolvedValueOnce(mockResponse);
 
       const result = await attemptFetch({
         url: "https://api.example.com/arrayBuffer",
@@ -128,7 +124,7 @@ describe("attemptFetch", () => {
   describe("Error Handling", () => {
     it("should handle parse errors", async () => {
       const mockResponse = new Response("invalid json");
-      (global.fetch as jest.Mock).mockResolvedValueOnce(mockResponse);
+      (global.fetch as Mock).mockResolvedValueOnce(mockResponse);
 
       await expect(
         attemptFetch({
@@ -142,11 +138,7 @@ describe("attemptFetch", () => {
     });
 
     it("should throw error after max retries", async () => {
-      jest.clearAllMocks();
-      global.fetch = jest.fn();
-      jest.useFakeTimers();
-
-      (global.fetch as jest.Mock).mockRejectedValue(new Error("Network Error"));
+      (global.fetch as Mock).mockRejectedValue(new Error("Network Error"));
 
       const resultPromise = attemptFetch({
         url: "https://api.example.com/data",
@@ -157,18 +149,18 @@ describe("attemptFetch", () => {
 
       // Handle each retry cycle
       for (let i = 0; i < 2; i++) {
-        jest.runAllTimers();
+        vi.runAllTimers();
         await Promise.resolve();
         await Promise.resolve();
       }
 
-      jest.runAllTimers();
+      vi.runAllTimers();
 
       await expect(resultPromise).rejects.toThrow(
         "Fetch Error: Failed to fetch"
       );
       expect(global.fetch).toHaveBeenCalledTimes(3);
-      expect(jest.getTimerCount()).toBe(0);
+      expect(vi.getTimerCount()).toBe(0);
     });
   });
 });
