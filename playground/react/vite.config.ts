@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     fontPlugin({
       fonts: [
+        "Abril Fatface",
         {
           font: "Inter",
           weight: { from: "400", to: "800" },

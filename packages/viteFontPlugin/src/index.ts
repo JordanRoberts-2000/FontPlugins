@@ -1,24 +1,17 @@
 import type { Plugin } from "vite";
 import type { FontPluginConfig } from "./types/pluginConfigType.js";
 import addPreconnectLinks from "./utils/htmlGen/addPreconnectLinks.js";
-import modifyConfig from "./utils/modifyConfig.js";
-import FontPluginConfigSchema from "./schemas/configSchema.js";
-import PluginLog from "./utils/logging.js";
+import processConfig from "./utils/processConfig.js";
 
 export default function fontPlugin(config: FontPluginConfig): Plugin {
-  const validConfig = FontPluginConfigSchema.safeParse(config);
-  if (!validConfig.success) {
-    validConfig.error.errors.map((error) => {
-      PluginLog.error(`Validation Failed: ${error.message}`);
-    });
-    throw new Error("FontPlugin: Failed to validate provided config object");
-  }
+  // let processedConfig: ProccessedConfig;
   return {
     name: "vite-font-plugin",
     config() {
-      config = modifyConfig(config);
+      // processedConfig = processConfig(config);
     },
     transformIndexHtml(html) {
+      // const { fonts: settings } = processedConfig;
       if (process.env.NODE_ENV === "development") {
         html = addPreconnectLinks(html);
 

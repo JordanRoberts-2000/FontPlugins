@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "update": "cd packages/viteFontPlugin && npm run build && yalc publish && cd ../../playground/react && yalc add @strawr/vite-font-plugin",
-    "genTypes": "tsx scripts/generatePluginConfigType.ts"
+    "processUrl": "tsx scripts/processGoogleFontUrl.ts"
   },
   "author": "",
   "license": "ISC",
