@@ -2,7 +2,7 @@ import fetchFontMetaData from "../../utils/fetchFontMetaData.js";
 import attemptFetch from "../../utils/attemptFetch.js";
 import type { Mock } from "vitest";
 
-const errorPrefix = "[Script - GeneratePluginConfigType]";
+const prefix = "[Script - GeneratePluginConfigType]";
 
 vi.mock("../../utils/attemptFetch.js");
 
@@ -37,7 +37,7 @@ describe("fetchFontMetaData", () => {
       url: mockUrl,
       parse: "JSON",
       retries: 3,
-      errorPrefix,
+      errorPrefix: prefix,
     });
 
     expect(result).toEqual(mockResponse.familyMetadataList);
@@ -65,7 +65,7 @@ describe("fetchFontMetaData", () => {
       .mockImplementation(() => {});
 
     await expect(fetchFontMetaData(mockUrl)).rejects.toThrow(
-      `${errorPrefix} Failed to validate fontsMetaDataJSON`
+      `${prefix} Failed to validate fontsMetaDataJSON`
     );
     expect(consoleErrorSpy).toHaveBeenCalled();
   });
@@ -90,7 +90,7 @@ describe("fetchFontMetaData", () => {
       .mockImplementation(() => {});
 
     await expect(fetchFontMetaData(mockUrl)).rejects.toThrow(
-      `${errorPrefix} Failed to validate fontsMetaDataJSON`
+      `${prefix} Failed to validate fontsMetaDataJSON`
     );
 
     expect(consoleErrorSpy).toHaveBeenCalled();
