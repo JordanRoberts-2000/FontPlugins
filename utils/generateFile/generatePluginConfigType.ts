@@ -23,12 +23,13 @@ function pluginConfigType(fontData: FontData) {
 
 export type FontPluginConfig = {
   config?: {
-    suppressNotOpenSourceWarnings: boolean,
+    suppressNotOpenSourceWarnings?: boolean,
     handleCss?: "inlineHead" | "buildFile",
     selfHost?: boolean,
     defaultPreload?: boolean,
+    defaultModifiedFallback?: boolean,
     defaultDisplay?: "auto" | "block" | "swap" | "fallback" | "optional",
-    includeItalicsByDefault: boolean,
+    includeItalicsByDefault?: boolean,
   },
   fonts: Array<${fontConfigType} ${fontTitlesType}>
 }
@@ -52,10 +53,10 @@ function generateFontTypes(fontData: FontData) {
         modifiedFallback?: boolean,
         customFallback?: string,
         display?: "auto" | "block" | "swap" | "fallback" | "optional",
-        weight?: ${generateWeights(roman, axes)}
-        italic?: ${generateItalics(italic)}
-        subsets?: ${generateField(subsets)}
-        axes?: ${generateField(axes)}
+        weight?: ${generateWeights(roman, axes)},
+        italic?: ${generateItalics(italic)},
+        subsets?: ${generateField(subsets)},
+        axes?: ${generateField(axes)},
     }`;
   });
 
@@ -68,7 +69,7 @@ function generateFontTypes(fontData: FontData) {
 function generateWeights(roman: number[], axes: string[]) {
   return `"all"${axes.length > 0 ? ' | "variable" ' : ""} | ${
     '"' + roman.join('" | "') + '"'
-  } | Array<${'"' + roman.join('" | "') + '"'}> ${
+  } | Array<${'"' + roman.join('" | "') + '"'}>${
     roman.length > 1
       ? ` | { from: ${'"' + roman.slice(0, -1).join('" | "') + '"'}, to: ${
           '"' + roman.slice(1).join('" | "') + '"'
@@ -78,27 +79,27 @@ function generateWeights(roman: number[], axes: string[]) {
 }
 
 function generateItalics(italics: number[]) {
-  `${
+  return `${
     italics.length > 0
       ? `"all" | boolean | ${'"' + italics.join('" | "') + '"'} | Array<${
           '"' + italics.join('" | "') + '"'
-        }> ${
+        }>${
           italics.length > 1
             ? `| { from: ${
                 '"' + italics.slice(0, -1).join('" | "') + '"'
               }, to: ${'"' + italics.slice(1).join('" | "') + '"'}}`
             : ""
-        },`
-      : "never,"
+        }`
+      : "never"
   }`;
 }
 
 function generateField(field: string[]) {
-  `${
+  return `${
     field.length > 0
       ? `"all" | ${'"' + field.join('" | "') + '"'} | Array<${
           '"' + field.join('" | "') + '"'
-        }>,`
-      : "never,"
+        }>`
+      : "never"
   }`;
 }
