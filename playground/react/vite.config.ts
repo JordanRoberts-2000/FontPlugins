@@ -11,10 +11,15 @@ export default defineConfig({
         "Abril Fatface",
         {
           font: "Inter",
-          weight: { from: "400", to: "800" },
-          italic: { from: "100", to: "300" },
+          weight: "variable",
+          italic: true,
           axes: ["opsz", "wght"],
           subsets: ["greek-ext"],
+        },
+        {
+          font: "Poppins",
+          weight: { from: "400", to: "900" },
+          italic: "400",
         },
       ],
     }),

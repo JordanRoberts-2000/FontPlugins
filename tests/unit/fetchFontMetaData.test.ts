@@ -1,8 +1,7 @@
 import fetchFontMetaData from "../../utils/fetchFontMetaData.js";
 import attemptFetch from "../../utils/attemptFetch.js";
 import type { Mock } from "vitest";
-
-const prefix = "[Script - GeneratePluginConfigType]";
+import { prefix } from "../../utils/constants.js";
 
 vi.mock("../../utils/attemptFetch.js");
 

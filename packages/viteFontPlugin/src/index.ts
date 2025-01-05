@@ -11,7 +11,7 @@ export default function fontPlugin(config: FontPluginConfig): Plugin {
       // processedConfig = processConfig(config);
     },
     transformIndexHtml(html) {
-      // const { fonts: settings } = processedConfig;
+      // const { settings, fonts } = processedConfig;
       if (process.env.NODE_ENV === "development") {
         html = addPreconnectLinks(html);
 

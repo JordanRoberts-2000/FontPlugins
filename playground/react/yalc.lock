@@ -2,7 +2,7 @@
   "version": "v1",
   "packages": {
     "@strawr/vite-font-plugin": {
-      "signature": "5420d31098f79f1e314a66d4d5d01a44",
+      "signature": "501f29bd1cfcc986f4ab5233c183289d",
       "file": true
     }
   }
