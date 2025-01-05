@@ -17,16 +17,29 @@ describe("fetchFontMetaData", () => {
       familyMetadataList: [
         {
           family: "Roboto",
-          subsets: ["latin", "cyrillic"],
+          subsets: ["latin", "menu", "cyrillic"],
           fonts: {
-            regular: { weight: 400 },
-            bold: { weight: 700 },
+            "400": {},
+            "700i": {},
           },
           axes: [{ tag: "wght" }, { tag: "ital" }],
           isOpenSource: true,
         },
       ],
     };
+
+    const expectedResult = [
+      {
+        family: "Roboto",
+        subsets: ["latin", "cyrillic"],
+        weights: {
+          roman: [400],
+          italic: [700],
+        },
+        axes: ["wght", "ital"],
+        isOpenSource: true,
+      },
+    ];
 
     (attemptFetch as Mock).mockResolvedValue(mockResponse);
 
@@ -39,9 +52,15 @@ describe("fetchFontMetaData", () => {
       errorPrefix: prefix,
     });
 
-    expect(result).toEqual(mockResponse.familyMetadataList);
+    expect(result).toEqual(expectedResult);
     expect(result[0].family).toBe("Roboto");
     expect(result[0].subsets).toEqual(["latin", "cyrillic"]);
+    expect(result[0].weights).toEqual({
+      roman: [400],
+      italic: [700],
+    });
+    expect(result[0].axes).toEqual(["wght", "ital"]);
+    expect(result[0].isOpenSource).toBe(true);
   });
 
   it("should throw error when validation fails due to missing required field", async () => {
@@ -50,7 +69,7 @@ describe("fetchFontMetaData", () => {
         {
           // missing 'family' field
           subsets: ["latin"],
-          fonts: {},
+          weights: {},
           axes: [{ tag: "wght" }],
           isOpenSource: true,
         },
