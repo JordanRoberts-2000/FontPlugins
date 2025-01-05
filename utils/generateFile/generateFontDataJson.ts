@@ -1,8 +1,9 @@
 import fs from "fs/promises";
 import { prefix } from "../constants.js";
 import type { FontData } from "../fontMetaDataSchema.js";
+import formatDate from "../formatDate.js";
 
-const generateFile = "googleFontMetaData.json";
+const generateFile = `googleFontData_${formatDate(new Date())}.json`;
 
 export default async function generateFontDataJson(fontMetadata: FontData) {
   try {
