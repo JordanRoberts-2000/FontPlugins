@@ -52,11 +52,13 @@ function generateFontTypes(fontData: FontData) {
         preload?: boolean,
         modifiedFallback?: boolean,
         customFallback?: string,
-        display?: "auto" | "block" | "swap" | "fallback" | "optional",
-        weight?: ${generateWeights(roman, axes)},
-        italic?: ${generateItalics(italic)},
-        subsets?: ${generateField(subsets)},
-        axes?: ${generateField(axes)},
+        display?: "auto" | "block" | "swap" | "fallback" | "optional",${generateWeights(
+          roman,
+          axes
+        )}${generateItalics(italic)}${generateField(
+      subsets,
+      "subsets"
+    )}${generateField(axes, "axes")}
     }`;
   });
 
@@ -67,39 +69,43 @@ function generateFontTypes(fontData: FontData) {
 }
 
 function generateWeights(roman: number[], axes: string[]) {
-  return `"all"${axes.length > 0 ? ' | "variable" ' : ""} | ${
-    '"' + roman.join('" | "') + '"'
-  } | Array<${'"' + roman.join('" | "') + '"'}>${
+  if (roman.length === 0) {
+    return `${axes.length > 0 ? '\n\t\t\t\tweight?: "variable,"' : ""}`;
+  }
+
+  return `\n\t\t\t\tweight?: "all"${
+    axes.length > 0 ? ' | "variable"' : ""
+  } | ${roman.join(" | ")} | Array<${roman.join(" | ")}>${
     roman.length > 1
-      ? ` | { from: ${'"' + roman.slice(0, -1).join('" | "') + '"'}, to: ${
-          '"' + roman.slice(1).join('" | "') + '"'
-        }}`
+      ? ` | { min: ${roman.slice(0, -1).join(" | ")}, max: ${roman
+          .slice(1)
+          .join(" | ")} }`
       : ""
   }`;
 }
 
 function generateItalics(italics: number[]) {
-  return `${
-    italics.length > 0
-      ? `"all" | boolean | ${'"' + italics.join('" | "') + '"'} | Array<${
-          '"' + italics.join('" | "') + '"'
-        }>${
-          italics.length > 1
-            ? `| { from: ${
-                '"' + italics.slice(0, -1).join('" | "') + '"'
-              }, to: ${'"' + italics.slice(1).join('" | "') + '"'}}`
-            : ""
-        }`
-      : "never"
-  }`;
+  if (italics.length === 0) {
+    return ``;
+  }
+
+  return `\n\t\t\t\titalic?: "all" | boolean | ${italics.join(
+    " | "
+  )} | Array<${italics.join(" | ")}>${
+    italics.length > 1
+      ? ` | { min: ${italics.slice(0, -1).join(" | ")}, max: ${italics
+          .slice(1)
+          .join(" | ")} }`
+      : ""
+  },`;
 }
 
-function generateField(field: string[]) {
-  return `${
-    field.length > 0
-      ? `"all" | ${'"' + field.join('" | "') + '"'} | Array<${
-          '"' + field.join('" | "') + '"'
-        }>`
-      : "never"
-  }`;
+function generateField(field: string[], fieldName: string): string {
+  if (field.length === 0) {
+    return "";
+  }
+
+  return `\n\t\t\t\t${fieldName}?: "all" | ${field
+    .map((f) => `"${f}"`)
+    .join(" | ")} | Array<${field.map((f) => `"${f}"`).join(" | ")}>,`;
 }

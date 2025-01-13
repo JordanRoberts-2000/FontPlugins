@@ -27503,18 +27503,24 @@
     "weights": {
       "roman": [
         100,
+        200,
         300,
         400,
         500,
+        600,
         700,
+        800,
         900
       ],
       "italic": [
         100,
+        200,
         300,
         400,
         500,
+        600,
         700,
+        800,
         900
       ]
     },
@@ -27525,9 +27531,14 @@
       "greek-ext",
       "latin",
       "latin-ext",
+      "math",
+      "symbols",
       "vietnamese"
     ],
-    "axes": [],
+    "axes": [
+      "wdth",
+      "wght"
+    ],
     "isOpenSource": true
   },
   {
@@ -30331,9 +30342,7 @@
       ],
       "italic": []
     },
-    "subsets": [
-      "latin"
-    ],
+    "subsets": [],
     "axes": [],
     "isOpenSource": true
   },
@@ -31063,9 +31072,7 @@
       ],
       "italic": []
     },
-    "subsets": [
-      "latin"
-    ],
+    "subsets": [],
     "axes": [],
     "isOpenSource": true
   },
