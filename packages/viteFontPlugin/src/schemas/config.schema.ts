@@ -12,6 +12,7 @@ const configSchema = z
       .enum(["auto", "block", "swap", "fallback", "optional"])
       .default("swap"),
   })
+  .strict()
   .default({
     suppressNotOpenSourceWarnings: false,
     selfHost: true,
