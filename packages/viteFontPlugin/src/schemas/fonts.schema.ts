@@ -1,19 +1,18 @@
 import { z } from "zod";
 import { fontData } from "../utils/googleFontDataMap.js";
 
+const fontSchema = z.string().refine(
+  (fontName) => fontData.has(fontName),
+  (val) => ({
+    message: `Invalid font-family: ${val}`,
+  })
+);
+
 const fontsSchema = z.array(
   z.union([
-    z
-      .string()
-      .refine((fontName) => fontData.has(fontName.replace(/\s+/g, "_")), {
-        message: "Invalid font-family",
-      }),
+    fontSchema,
     z.object({
-      font: z
-        .string()
-        .refine((fontName) => fontData.has(fontName.replace(/\s+/g, "_")), {
-          message: "Invalid font-family",
-        }),
+      font: fontSchema,
       className: z.string().optional(),
       cssVariable: z
         .string()
@@ -32,8 +31,8 @@ const fontsSchema = z.array(
           z.string(),
           z.array(z.string()),
           z.object({
-            min: z.string(),
-            max: z.string(),
+            from: z.string(),
+            to: z.string(),
           }),
         ])
         .optional(),
@@ -43,15 +42,17 @@ const fontsSchema = z.array(
           z.boolean(),
           z.array(z.string()),
           z.object({
-            min: z.string(),
-            max: z.string(),
+            from: z.string(),
+            to: z.string(),
           }),
         ])
         .optional(),
-      subsets: z.union([z.string(), z.array(z.string())]).optional(),
-      axes: z.union([z.string(), z.array(z.string())]).optional(),
+      subsets: z.union([z.string(), z.array(z.string())]).default([]),
+      axes: z.union([z.string(), z.array(z.string())]).default([]),
     }),
   ])
 );
+
+export type FontSchema = z.infer<typeof fontsSchema>;
 
 export default fontsSchema;

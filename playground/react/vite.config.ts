@@ -10,16 +10,25 @@ export default defineConfig({
       fonts: [
         "Abril Fatface",
         {
+          font: "Aclonica",
+        },
+        {
           font: "Inter",
-          weight: "variable",
+          weight: "400",
           italic: true,
           axes: ["opsz", "wght"],
           subsets: ["greek-ext"],
         },
         {
           font: "Poppins",
-          weight: { from: "400", to: "900" },
+          weight: { from: "500", to: "900" },
           italic: "400",
+          subsets: "all",
+        },
+        {
+          font: "DM Sans",
+          axes: "all",
+          subsets: "latin-ext",
         },
       ],
     }),

@@ -21,4 +21,6 @@ const configSchema = z
     defaultDisplay: "swap",
   });
 
+export type ConfigSchema = z.infer<typeof configSchema>;
+
 export default configSchema;
