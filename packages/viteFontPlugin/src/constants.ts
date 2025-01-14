@@ -1,7 +1,38 @@
 export const FONTS_BUILD_FOLDER_NAME = "__google_fonts";
 export const CSS_BUILD_FILE_NAME = "fonts.css";
 
-export const DEFAULT_FONT_DISPLAY = "swap";
+export const LOGGER_PREFIX = "[@strawr/vite-font-plugin] - ";
+
+export const DISPLAY_OPTIONS = [
+  "auto",
+  "block",
+  "swap",
+  "fallback",
+  "optional",
+] as const;
+
+export const DEFAULT_CONFIG = {
+  suppressNotOpenSourceWarnings: false,
+  selfHost: true,
+  handleCss: "inlineHead" as const,
+  includeItalicsByDefault: true,
+  defaultModifiedFallback: true,
+  defaultPreload: false,
+  defaultDisplay: "swap" as const,
+};
+
+export const SUBSET_PRIORITY_ARRAY = [
+  "Latin",
+  "Latin-Ext",
+  "Cyrillic",
+  "Greek",
+  "Greek-Ext",
+  "Vietnamese",
+  "Cyrillic-Ext",
+  "Hebrew",
+  "Arabic",
+  "Devanagari",
+];
 
 export const DEFAULT_SERIF_FONT = {
   name: "timesNewRoman",
