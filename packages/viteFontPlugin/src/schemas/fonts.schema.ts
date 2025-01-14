@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { fontData } from "../utils/googleFontDataMap.js";
+import { DISPLAY_OPTIONS } from "../constants.js";
+import PluginLogger from "../utils/logger.js";
 
 export function generateFontsSchema(fontData: Map<string, unknown>) {
   const nameSchema = z.string().refine(
@@ -47,37 +49,48 @@ export function generateFontsSchema(fontData: Map<string, unknown>) {
         max: numericFontWeightSchema,
       })
       .refine(({ min, max }) => min < max, {
-        message: "Invalid italic weight: max !> min ",
+        message: "Invalid italic weight: max > min ",
       }),
   ]);
 
   return z
     .array(
-      z.union([
-        nameSchema,
-        z.object({
-          font: nameSchema,
-          className: z.string().optional(),
-          cssVariable: z
-            .string()
-            .transform((varName) =>
-              varName.startsWith("--") ? varName : "--" + varName
-            )
-            .optional(),
-          preload: z.boolean().optional(),
-          modifiedFallback: z.boolean().optional(),
-          customFallback: z.string().optional(),
-          display: z
-            .enum(["auto", "block", "swap", "fallback", "optional"])
-            .optional(),
-          weight: weightSchema.optional(),
-          italic: italicWeightsSchema.optional(),
-          subsets: z.union([z.string(), z.array(z.string())]).default([]),
-          axes: z.union([z.string(), z.array(z.string())]).default([]),
-        }),
-      ])
+      z
+        .union([
+          z.null(),
+          nameSchema,
+          z.object({
+            font: nameSchema,
+            className: z.string().optional(),
+            cssVariable: z
+              .string()
+              .transform((varName) =>
+                varName.startsWith("--") ? varName : "--" + varName
+              )
+              .optional(),
+            preload: z.boolean().optional(),
+            modifiedFallback: z.boolean().optional(),
+            customFallback: z.string().optional(),
+            display: z.enum(DISPLAY_OPTIONS),
+            weight: weightSchema.optional(),
+            italic: italicWeightsSchema.optional(),
+            subsets: z.union([z.string(), z.array(z.string())]).optional(),
+            axes: z.union([z.string(), z.array(z.string())]).optional(),
+          }),
+        ])
+        .catch(({ input, error }) => {
+          PluginLogger.error(
+            `Font '${
+              typeof input === "string" ? input : input?.font
+            }' is invalid. Error: ${error}`
+          );
+          return null;
+        })
     )
-    .min(1, { message: "Fonts array must have atleast 1 item" });
+    .catch(({ input, error }) => {
+      PluginLogger.error(`Fonts value '${input}' is invalid. Error: ${error}`);
+      return [];
+    });
 }
 
 const fontsSchema = generateFontsSchema(fontData);

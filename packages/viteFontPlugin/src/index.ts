@@ -3,21 +3,28 @@ import type { FontPluginConfig } from "./types/pluginConfigType.js";
 import addPreconnectLinks from "./utils/htmlGen/addPreconnectLinks.js";
 // import processConfig from "./utils/processConfig.js";
 import fs from "fs";
+import PluginLog from "./utils/logger.js";
 
 export default function fontPlugin(config: FontPluginConfig): Plugin {
   let processedConfig; //: ProccessedConfig;
   return {
     name: "vite-font-plugin",
-    config() {
-      // processedConfig = processConfig(config);
-      // // console.log(`Processed Config: ${JSON.stringify(processedConfig)}`);
-      // fs.writeFile(
-      //   "../../configOutput.json",
-      //   JSON.stringify(processedConfig),
-      //   (err) => console.log(err)
-      // );
+    config(_, { command }) {
+      // try {
+      //   processedConfig = processConfig(config);
+      // } catch (error) {
+      //   if(command === "build"){
+      //     PluginLog.fatal(`Fail the build due to incorrect config: ${error}`)
+      //   }
+      //   PluginLog.error(`config was incorrect ${error}`);
+      //   processedConfig = null
+      // }
     },
     transformIndexHtml(html) {
+      // if(!processedConfig || !processedConfig.fonts){
+      //   return html
+      // }
+
       // const { settings, fonts } = processedConfig;
       if (process.env.NODE_ENV === "development") {
         html = addPreconnectLinks(html);
@@ -26,7 +33,7 @@ export default function fontPlugin(config: FontPluginConfig): Plugin {
 
         // Add google font url links
 
-        // Inject fallbacks
+        // Inject fallbacks???
 
         // Inject css classes into the head
 
@@ -42,6 +49,9 @@ export default function fontPlugin(config: FontPluginConfig): Plugin {
     },
 
     buildEnd() {
+      // if(!processedConfig){
+      //   return html
+      // }
       // download each font, retrieve some css while doing so
       // build & minify css file, add it to dist/build folder, include fallbacks
     },
