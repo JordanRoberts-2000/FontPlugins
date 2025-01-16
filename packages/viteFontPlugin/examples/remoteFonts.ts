@@ -2,13 +2,13 @@ export const pluginConfig = {
   remoteFonts: {
     name: "Open Sans",
     className: "classname",
-    selfHost: true,
     cssVariable: "--serif",
     fallback: "customFallback",
     display: "swap",
-    preload: true,
     convertToWoff2: true,
     optimize: true,
+    selfHost: true,
+    preload: true,
     defer: false,
     unicodeRange: "",
     urls: [

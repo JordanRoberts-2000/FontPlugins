@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { generateFontsSchema } from "../../src/schemas/fonts.schema.js";
+import { generateFontsSchema } from "../../src/schemas/legacyFontsSchema.js";
 
 describe("FontsSchema", () => {
   const mockFontData = new Map([

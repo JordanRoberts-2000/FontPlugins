@@ -1,4 +1,4 @@
-import pluginConfigSchema from "../schemas/pluginConfig.schema.js";
+import pluginConfigSchema from "../schemas/legacyConfigSchema.js";
 import type { FontPluginConfig } from "../types/pluginConfigType.js";
 import PluginLogger from "./logger.js";
 

@@ -1,6 +1,6 @@
 import { FontData } from "../../utils/googleFontDataMap.js";
 import PluginLogger from "../../utils/logger.js";
-import { FontSchema } from "../fonts.schema.js";
+import { FontSchema } from "../legacyFontsSchema.js";
 
 export default function processFontWeight(
   inputData: Exclude<Exclude<FontSchema[number], string>, null>,

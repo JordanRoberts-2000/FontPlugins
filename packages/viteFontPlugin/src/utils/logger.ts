@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { LOGGER_PREFIX } from "../constants.js";
 
-class PluginLogger {
+class Logger {
   static fatal(message: string): void {
     throw new Error(`${LOGGER_PREFIX}${message}`);
   }
@@ -19,4 +19,4 @@ class PluginLogger {
   }
 }
 
-export default PluginLogger;
+export default Logger;

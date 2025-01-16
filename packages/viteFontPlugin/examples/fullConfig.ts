@@ -45,6 +45,7 @@ export const fontConfig = {
       fallback: "customFallback",
       display: "swap",
       selfHost: true,
+      optimize: true,
       weights: ["allSupportedWieghts", "variable"],
       includeItalics: "allSupportedItalics",
       subsets: "allSubsets",

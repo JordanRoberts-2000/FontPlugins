@@ -1,6 +1,6 @@
 import processSubField from "./processSubField.js";
 import { fontData as fontMap } from "../../utils/googleFontDataMap.js";
-import { FontSchema } from "../fonts.schema.js";
+import { FontSchema } from "../legacyFontsSchema.js";
 import { ConfigSchema } from "../config.schema.js";
 import processFontWeight from "./processFontWeight.js";
 import processFontItalic from "./processFontItalic.js";

@@ -7,10 +7,12 @@ export const fontConfig = {
     cssVariable: "--serif",
     fallback: "customFallback",
     display: "swap",
+
     includeAdjustedFallback: "Google Font", // or false
-    unicodeRange: "",
+
     preload: true,
     defer: false,
+    unicodeRange: "",
     urls: [
       {
         fontUrl: "",

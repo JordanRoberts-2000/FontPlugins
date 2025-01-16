@@ -1,5 +1,5 @@
 import { FontData } from "../../utils/googleFontDataMap.js";
-import { FontSchema } from "../fonts.schema.js";
+import { FontSchema } from "../legacyFontsSchema.js";
 
 export default function processFontItalic(
   italic: Exclude<Exclude<FontSchema[number], string>, null>["italic"],
