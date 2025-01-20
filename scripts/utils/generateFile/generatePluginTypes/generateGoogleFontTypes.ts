@@ -10,11 +10,9 @@ export default function generateFontTypes(fontData: FontData) {
 
     fontConfigType += `
     | (GoogleFontSharedOptions & {
-        font: "${family}",
-       ${generateWeights(roman, axes)}${generateItalics(italic)}${generateField(
-      subsets,
-      "subsets"
-    )}${generateField(axes, "axes")}
+        font: "${family}",${generateWeights(roman, axes)}${generateItalics(
+      italic
+    )}${generateField(subsets, "subsets")}${generateField(axes, "axes")}
   })`;
   });
 
@@ -28,8 +26,7 @@ type GoogleFontSharedOptions = {
   display?: SubsetOptions,
 }
 
-type GoogleFonts = Array<${fontConfigType} ${fontTitlesType}>, 
-
+type GoogleFonts = Array<${fontConfigType} ${fontTitlesType}>; 
 `;
 }
 
@@ -38,7 +35,7 @@ function generateWeights(roman: number[], axes: string[]) {
     return `${axes.length > 0 ? '\n\t\t\t\tweight?: "variable,"' : ""}`;
   }
 
-  return `\n\t\t\t\tweight?: "all"${
+  return `\n\t\t\t\tweight?: "allSupportedWeights"${
     axes.length > 0 ? ' | "variable"' : ""
   } | ${roman.join(" | ")} | Array<${roman.join(" | ")}>${
     roman.length > 1
@@ -54,7 +51,7 @@ function generateItalics(italics: number[]) {
     return ``;
   }
 
-  return `\n\t\t\t\titalic?: "all" | boolean | ${italics.join(
+  return `\n\t\t\t\titalic?: "allSupportedWeights" | boolean | ${italics.join(
     " | "
   )} | Array<${italics.join(" | ")}>${
     italics.length > 1
@@ -72,5 +69,5 @@ function generateField(field: string[], fieldName: string): string {
 
   return `\n\t\t\t\t${fieldName}?: "all" | ${field
     .map((f) => `"${f}"`)
-    .join(" | ")} | Array<${field.map((f) => `"${f}"`).join(" | ")}>,`;
+    .join(" | ")} | Array<${field.map((f) => `"${f}"`).join(" | ")}>;`;
 }

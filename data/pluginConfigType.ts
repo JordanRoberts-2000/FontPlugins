@@ -2,88 +2,86 @@
 
 export type PluginConfig = {
   settings?: PluginConfigSettings,
-  googleFonts: GoogleFonts},
-}
+  googleFonts: GoogleFonts
+};
 
 export type DisplayOptions = "auto | block | swap | fallback | optional";
 
 export type SubsetOptions = "latin | latin-ext | cyrillic | cyrillic-ext | greek | greek-ext | vietnamese | hebrew | arabic | devanagari | thai | bengali | tamil | telugu | kannada | gujarati | khmer | sinhala | oriya | malayalam | gurmukhi | japanese | korean | chinese-simplified | chinese-traditional";
 
+export type PluginConfigSettings = {
+  disable?: boolean,
+  preload?: boolean,
+  display?: DisplayOptions,
+  handleCss?: "inlineHead | externalBuildFiles",
+  subset?: SubsetOptions,
+  includeItalicsByDefault?: boolean,
+  unicodeRange?: string,
+  preconnects?: string[],
+  optimize?: {
+    enabled?: boolean,
+    extractUnicodeRange?: boolean,
+    trimUnusedWeightsAndStyles?: boolean,
+    convertToWoff2?: boolean,
+  },
 
-  export type PluginConfigSettings = {
+  google?: {
     disable?: boolean,
+    preconnect?: boolean,
+    suppressNotOpenSourceWarnings?: boolean,
+    adjustedFallback?: boolean,
+    includeItalicsByDefault?: boolean,
+    preload?: boolean,
+    subset?: SubsetOptions,
+    display?: DisplayOptions,
+    fallbackSubsets?: DisplayOptions[],
+    selfHost?: {
+      enabled?: true,
+      extractUnicodeRange?: true,
+      trimUnusedWeightsAndStyles?: true,
+    },
+  },
+
+  local?: {
+    disable?: boolean,
+    subset?: SubsetOptions,
+    unicodeRange?: string,
     preload?: boolean,
     display?: DisplayOptions,
-    handleCss?: "inlineHead | externalBuildFiles",
-    subset?: SubsetOptions,
-    includeItalicsByDefault?: boolean,
-    unicodeRange?: string,
-    preconnects?: string[],
+    selfHostRemoteUrlsOnBuild?: boolean,
     optimize?: {
       enabled?: boolean,
       extractUnicodeRange?: boolean,
       trimUnusedWeightsAndStyles?: boolean,
       convertToWoff2?: boolean,
     },
-  
-    google?: {
-      disable?: boolean,
-      preconnect?: boolean,
-      suppressNotOpenSourceWarnings?: boolean,
-      adjustedFallback?: boolean,
-      includeItalicsByDefault?: boolean,
-      preload?: boolean,
-      subset?: SubsetOptions,
-      display?: DisplayOptions,
-      fallbackSubsets?: DisplayOptions[],
-      selfHost?: {
-        enabled?: true,
-        extractUnicodeRange?: true,
-        trimUnusedWeightsAndStyles?: true,
-      },
-    },
-  
-    local?: {
-      disable?: boolean,
-      subset?: SubsetOptions,
-      unicodeRange?: string,
-      preload?: boolean,
-      display?: DisplayOptions,
-      selfHostRemoteUrlsOnBuild?: boolean,
-      optimize?: {
-        enabled?: boolean,
-        extractUnicodeRange?: boolean,
-        trimUnusedWeightsAndStyles?: boolean,
-        convertToWoff2?: boolean,
-      },
-    },
-  
-    css: {
-      method: "inlineHead | externalBuildFiles",
-      minify: boolean,
-    },
-  
-    script: {
-      outputFolder: string,
-      css: {
-        disable: boolean,
-        minify: boolean,
-        fileName: string,
-        outputFolder: string,
-      },
-      fontFiles: {
-        disable: boolean,
-        outputFolder: string,
-        optimize: {
-          enabled: boolean,
-          extractUnicodeRange: boolean,
-          trimUnusedWeightsAndStyles: boolean,
-          convertToWoff2: boolean,
-        },
-      },
-    },
-  };
+  },
 
+  css: {
+    method: "inlineHead | externalBuildFiles",
+    minify: boolean,
+  },
+
+  script: {
+    outputFolder: string,
+    css: {
+      disable: boolean,
+      minify: boolean,
+      fileName: string,
+      outputFolder: string,
+    },
+    fontFiles: {
+      disable: boolean,
+      outputFolder: string,
+      optimize: {
+        enabled: boolean,
+        extractUnicodeRange: boolean,
+        trimUnusedWeightsAndStyles: boolean,
+        convertToWoff2: boolean,
+      },
+    },
+  },
+};
 
 type GoogleFontSharedOptions = {
   className?: string,
@@ -97,11397 +95,9607 @@ type GoogleFontSharedOptions = {
 type GoogleFonts = Array<
     | (GoogleFontSharedOptions & {
         font: "ABeeZee",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "ADLaM Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "adlam" | "latin" | "latin-ext" | Array<"adlam" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "adlam" | "latin" | "latin-ext" | Array<"adlam" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "AR One Sans",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "ARRR" | "wght" | Array<"ARRR" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "ARRR" | "wght" | Array<"ARRR" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Abel",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Abhaya Libre",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aboreto",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Abril Fatface",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Abyssinica SIL",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "ethiopic" | "latin" | "latin-ext" | Array<"ethiopic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "ethiopic" | "latin" | "latin-ext" | Array<"ethiopic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aclonica",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Acme",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Actor",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Adamina",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Advent Pro",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Afacad",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Afacad Flux",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Agbalumo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Agdasima",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Agu Display",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "MORF" | Array<"MORF">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "MORF" | Array<"MORF">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aguafina Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Akatab",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "tifinagh" | Array<"latin" | "latin-ext" | "tifinagh">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "tifinagh" | Array<"latin" | "latin-ext" | "tifinagh">;
   })
     | (GoogleFontSharedOptions & {
         font: "Akaya Kanadaka",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Akaya Telivigala",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Akronim",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Akshar",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aladin",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alata",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alatsi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Albert Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aldrich",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alef",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alegreya",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alegreya SC",
-       
-				weight?: "all" | 400 | 500 | 700 | 800 | 900 | Array<400 | 500 | 700 | 800 | 900> | { min: 400 | 500 | 700 | 800, max: 500 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 700 | 800 | 900 | Array<400 | 500 | 700 | 800 | 900> | { min: 400 | 500 | 700 | 800, max: 500 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | 800 | 900 | Array<400 | 500 | 700 | 800 | 900> | { min: 400 | 500 | 700 | 800, max: 500 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 700 | 800 | 900 | Array<400 | 500 | 700 | 800 | 900> | { min: 400 | 500 | 700 | 800, max: 500 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alegreya Sans",
-       
-				weight?: "all" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alegreya Sans SC",
-       
-				weight?: "all" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aleo",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alex Brush",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alexandria",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alfa Slab One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alice",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alike",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alike Angular",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alkalami",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alkatra",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "bengali" | "devanagari" | "latin" | "latin-ext" | "oriya" | Array<"bengali" | "devanagari" | "latin" | "latin-ext" | "oriya">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "bengali" | "devanagari" | "latin" | "latin-ext" | "oriya" | Array<"bengali" | "devanagari" | "latin" | "latin-ext" | "oriya">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Allan",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Allerta",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Allerta Stencil",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Allison",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Allura",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Almarai",
-       
-				weight?: "all" | 300 | 400 | 700 | 800 | Array<300 | 400 | 700 | 800> | { min: 300 | 400 | 700, max: 400 | 700 | 800 }
-				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | 800 | Array<300 | 400 | 700 | 800> | { min: 300 | 400 | 700, max: 400 | 700 | 800 }
+				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Almendra",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Almendra Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Almendra SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alumni Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alumni Sans Collegiate One",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alumni Sans Inline One",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Alumni Sans Pinstripe",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amarante",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amaranth",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amatic SC",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amethysta",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amiko",
-       
-				weight?: "all" | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amiri",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amiri Quran",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Amita",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anaheim",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Andada Pro",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Andika",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Bangla",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Devanagari",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Gujarati",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Gurmukhi",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Kannada",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Latin",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Malayalam",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Odia",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "oriya" | Array<"latin" | "latin-ext" | "oriya">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "oriya" | Array<"latin" | "latin-ext" | "oriya">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Tamil",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anek Telugu",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Angkor",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Annapurna SIL",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | "math" | "symbols" | Array<"devanagari" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | "math" | "symbols" | Array<"devanagari" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Annie Use Your Telescope",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anonymous Pro",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anta",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Antic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Antic Didone",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Antic Slab",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anton",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anton SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Antonio",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anuphan",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Anybody",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aoboshi One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arapey",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arbutus",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arbutus Slab",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Architects Daughter",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Archivo",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Archivo Black",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Archivo Narrow",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Are You Serious",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aref Ruqaa",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aref Ruqaa Ink",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arima",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "greek" | "greek-ext" | "latin" | "latin-ext" | "malayalam" | "tamil" | "vietnamese" | Array<"greek" | "greek-ext" | "latin" | "latin-ext" | "malayalam" | "tamil" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "greek" | "greek-ext" | "latin" | "latin-ext" | "malayalam" | "tamil" | "vietnamese" | Array<"greek" | "greek-ext" | "latin" | "latin-ext" | "malayalam" | "tamil" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arimo",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arizonia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Armata",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arsenal",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arsenal SC",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Artifika",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arvo",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Arya",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Asap",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Asap Condensed",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Asar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Asset",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Assistant",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Astloch",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Asul",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Athiti",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Atkinson Hyperlegible",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Atma",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Atomic Age",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Aubrey",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Audiowide",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Autour One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Average",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Average Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Averia Gruesa Libre",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Averia Libre",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Averia Sans Libre",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Averia Serif Libre",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Azeret Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "B612",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "B612 Mono",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "BIZ UDGothic",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "BIZ UDMincho",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "BIZ UDPGothic",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "BIZ UDPMincho",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Babylonica",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bacasime Antique",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bad Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Badeen Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bagel Fat One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bahiana",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bahianita",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bai Jamjuree",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bakbak One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ballet",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | Array<"opsz">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | Array<"opsz">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | "vietnamese" | Array<"devanagari" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | "vietnamese" | Array<"devanagari" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Bhai 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "vietnamese" | Array<"gujarati" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "vietnamese" | Array<"gujarati" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Bhaijaan 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Bhaina 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "oriya" | "vietnamese" | Array<"latin" | "latin-ext" | "oriya" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "oriya" | "vietnamese" | Array<"latin" | "latin-ext" | "oriya" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Chettan 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | "vietnamese" | Array<"latin" | "latin-ext" | "malayalam" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | "vietnamese" | Array<"latin" | "latin-ext" | "malayalam" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Da 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | "vietnamese" | Array<"bengali" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | "vietnamese" | Array<"bengali" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Paaji 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | "vietnamese" | Array<"gurmukhi" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | "vietnamese" | Array<"gurmukhi" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Tamma 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | "vietnamese" | Array<"kannada" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | "vietnamese" | Array<"kannada" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Tammudu 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | "vietnamese" | Array<"latin" | "latin-ext" | "telugu" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | "vietnamese" | Array<"latin" | "latin-ext" | "telugu" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baloo Thambi 2",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | "vietnamese" | Array<"latin" | "latin-ext" | "tamil" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | "vietnamese" | Array<"latin" | "latin-ext" | "tamil" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Balsamiq Sans",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Balthazar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bangers",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Barlow",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Barlow Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Barlow Semi Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Barriecito",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Barrio",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Basic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baskervville",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baskervville SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Battambang",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Baumans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bayon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Be Vietnam Pro",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Beau Rivage",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bebas Neue",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Beiruti",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Belanosima",
-       
-				weight?: "all" | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Belgrano",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bellefair",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Belleza",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bellota",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bellota Text",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "BenchNine",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Benne",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bentham",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Berkshire Swash",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Besley",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Beth Ellen",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bevan",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "BhuTuka Expanded One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Big Shoulders Display",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Big Shoulders Inline Display",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Big Shoulders Inline Text",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Big Shoulders Stencil Display",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Big Shoulders Stencil Text",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Big Shoulders Text",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bigelow Rules",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bigshot One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bilbo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bilbo Swash Caps",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "BioRhyme",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "BioRhyme Expanded",
-       
-				weight?: "all" | 200 | 300 | 400 | 700 | 800 | Array<200 | 300 | 400 | 700 | 800> | { min: 200 | 300 | 400 | 700, max: 300 | 400 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 700 | 800 | Array<200 | 300 | 400 | 700 | 800> | { min: 200 | 300 | 400 | 700, max: 300 | 400 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Birthstone",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Birthstone Bounce",
-       
-				weight?: "all" | 400 | 500 | Array<400 | 500> | { min: 400, max: 500 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 500 | Array<400 | 500> | { min: 400, max: 500 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Biryani",
-       
-				weight?: "all" | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 600 | 700 | 800, max: 300 | 400 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 600 | 700 | 800, max: 300 | 400 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bitter",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Black And White Picture",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Black Han Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Black Ops One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Blaka",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Blaka Hollow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Blaka Ink",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Blinker",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 600 | 700 | 800, max: 200 | 300 | 400 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 600 | 700 | 800, max: 200 | 300 | 400 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bodoni Moda",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bodoni Moda SC",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bokor",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bona Nova",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bona Nova SC",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bonbon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bonheur Royale",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Boogaloo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Borel",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bowlby One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bowlby One SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Braah One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | "vietnamese" | Array<"gurmukhi" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | "vietnamese" | Array<"gurmukhi" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Brawler",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bree Serif",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bricolage Grotesque",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bruno Ace",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bruno Ace SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Brygada 1918",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bubblegum Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bubbler One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Buda",
-       
-				weight?: "all" | 300 | Array<300>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | Array<300>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Buenard",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee Hairline",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee Inline",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee Outline",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee Shade",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee Spice",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Bungee Tint",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Butcherman",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Butterfly Kids",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cabin",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cabin Condensed",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cabin Sketch",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cactus Classical Serif",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caesar Dressing",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cagliostro",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cairo",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cairo Play",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caladea",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Calistoga",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Calligraffitti",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cambay",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cambo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Candal",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cantarell",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cantata One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cantora One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caprasimo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Capriola",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caramel",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Carattere",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cardo",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Carlito",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Carme",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Carrois Gothic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Carrois Gothic SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Carter One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Castoro",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Castoro Titling",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Catamaran",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caudex",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caveat",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Caveat Brush",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cedarville Cursive",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ceviche One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chakra Petch",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Changa",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Changa One",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chango",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Charis SIL",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Charm",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Charmonman",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chathura",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 800 | Array<100 | 300 | 400 | 700 | 800> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 800 }
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 800 | Array<100 | 300 | 400 | 700 | 800> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 800 }
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chau Philomene One",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chela One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chelsea Market",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chenla",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | Array<"khmer">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | Array<"khmer">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cherish",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cherry Bomb One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cherry Cream Soda",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cherry Swash",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chewy",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chicle",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chilanka",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chivo",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chivo Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chocolate Classical Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chokokutai",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Chonburi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cinzel",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cinzel Decorative",
-       
-				weight?: "all" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Clicker Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Climate Crisis",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "YEAR" | Array<"YEAR">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "YEAR" | Array<"YEAR">;
   })
     | (GoogleFontSharedOptions & {
         font: "Coda",
-       
-				weight?: "all" | 400 | 800 | Array<400 | 800> | { min: 400, max: 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 800 | Array<400 | 800> | { min: 400, max: 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Codystar",
-       
-				weight?: "all" | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Coiny",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | "vietnamese" | Array<"latin" | "latin-ext" | "tamil" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | "vietnamese" | Array<"latin" | "latin-ext" | "tamil" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Combo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Comfortaa",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Comforter",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Comforter Brush",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Comic Neue",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Coming Soon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Comme",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Commissioner",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "FLAR" | "VOLM" | "slnt" | "wght" | Array<"FLAR" | "VOLM" | "slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "FLAR" | "VOLM" | "slnt" | "wght" | Array<"FLAR" | "VOLM" | "slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Concert One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Condiment",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Content",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "khmer" | Array<"khmer">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "khmer" | Array<"khmer">;
   })
     | (GoogleFontSharedOptions & {
         font: "Contrail One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Convergence",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cookie",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Copse",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Corben",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Corinthia",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cormorant",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cormorant Garamond",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cormorant Infant",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cormorant SC",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cormorant Unicase",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cormorant Upright",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Courgette",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Courier Prime",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cousine",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Coustard",
-       
-				weight?: "all" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Covered By Your Grace",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Crafty Girls",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Creepster",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Crete Round",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Crimson Pro",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Crimson Text",
-       
-				weight?: "all" | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 }
-				italic?: "all" | boolean | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 600 | 700 | Array<400 | 600 | 700> | { min: 400 | 600, max: 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Croissant One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Crushed",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cuprum",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cute Font",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cutive",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Cutive Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "DM Mono",
-       
-				weight?: "all" | 300 | 400 | 500 | Array<300 | 400 | 500> | { min: 300 | 400, max: 400 | 500 }
-				italic?: "all" | boolean | 300 | 400 | 500 | Array<300 | 400 | 500> | { min: 300 | 400, max: 400 | 500 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | Array<300 | 400 | 500> | { min: 300 | 400, max: 400 | 500 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | Array<300 | 400 | 500> | { min: 300 | 400, max: 400 | 500 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "DM Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "DM Serif Display",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "DM Serif Text",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dai Banna SIL",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "new-tai-lue" | Array<"latin" | "latin-ext" | "new-tai-lue">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "new-tai-lue" | Array<"latin" | "latin-ext" | "new-tai-lue">;
   })
     | (GoogleFontSharedOptions & {
         font: "Damion",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dancing Script",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Danfo",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "ELSH" | Array<"ELSH">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "ELSH" | Array<"ELSH">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dangrek",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Darker Grotesque",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Darumadrop One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "David Libre",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dawning of a New Day",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Days One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dekko",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dela Gothic One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "greek" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "greek" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Delicious Handrawn",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Delius",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Delius Swash Caps",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Delius Unicase",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Della Respira",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Denk One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Devonshire",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dhurjati",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Didact Gothic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Diphylleia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Diplomata",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Diplomata SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Do Hyeon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dokdo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Domine",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Donegal One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dongle",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Doppio One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dorsa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dosis",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "DotGothic16",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Doto",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "ROND" | "wght" | Array<"ROND" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "ROND" | "wght" | Array<"ROND" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dr Sugiyama",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Duru Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "DynaPuff",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Dynalight",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "EB Garamond",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Eagle Lake",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "East Sea Dokdo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Eater",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Economica",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Eczar",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu AU VIC WA NT Arrows",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu AU VIC WA NT Dots",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu AU VIC WA NT Guides",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu AU VIC WA NT Hand",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu AU VIC WA NT Pre",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu NSW ACT Foundation",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu QLD Beginner",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu SA Beginner",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu TAS Beginner",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Edu VIC WA NT Beginner",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "El Messiri",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "cyrillic" | "latin" | "latin-ext" | Array<"arabic" | "cyrillic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "cyrillic" | "latin" | "latin-ext" | Array<"arabic" | "cyrillic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Electrolize",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Elsie",
-       
-				weight?: "all" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Elsie Swash Caps",
-       
-				weight?: "all" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Emblema One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Emilys Candy",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Encode Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Encode Sans Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Encode Sans Expanded",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Encode Sans SC",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Encode Sans Semi Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Encode Sans Semi Expanded",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Engagement",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Englebert",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Enriqueta",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ephesis",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Epilogue",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Erica One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Esteban",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Estonia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Euphoria Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ewert",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Exo",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Exo 2",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Expletus Sans",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Explora",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cherokee" | "latin" | "latin-ext" | "vietnamese" | Array<"cherokee" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cherokee" | "latin" | "latin-ext" | "vietnamese" | Array<"cherokee" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Faculty Glyphic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fahkwang",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Familjen Grotesk",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fanwood Text",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Farro",
-       
-				weight?: "all" | 300 | 400 | 500 | 700 | Array<300 | 400 | 500 | 700> | { min: 300 | 400 | 500, max: 400 | 500 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 700 | Array<300 | 400 | 500 | 700> | { min: 300 | 400 | 500, max: 400 | 500 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Farsan",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "vietnamese" | Array<"gujarati" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "vietnamese" | Array<"gujarati" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fascinate",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fascinate Inline",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Faster One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fasthand",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fauna One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Faustina",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Federant",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Federo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Felipa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fenix",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Festive",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Figtree",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Finger Paint",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Finlandica",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fira Code",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fira Mono",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fira Sans",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fira Sans Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fira Sans Extra Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fjalla One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fjord One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Flamenco",
-       
-				weight?: "all" | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Flavors",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fleur De Leah",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Flow Block",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Flow Circular",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Flow Rounded",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Foldit",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fondamento",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fontdiner Swanky",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Forum",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fragment Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Francois One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Frank Ruhl Libre",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fraunces",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "SOFT" | "WONK" | "opsz" | "wght" | Array<"SOFT" | "WONK" | "opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "SOFT" | "WONK" | "opsz" | "wght" | Array<"SOFT" | "WONK" | "opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Freckle Face",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fredericka the Great",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fredoka",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Freehand",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Freeman",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fresca",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Frijole",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fruktur",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fugaz One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fuggles",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Funnel Display",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Funnel Sans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fustat",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Fuzzy Bubbles",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "GFS Didot",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "greek" | Array<"greek">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "greek" | Array<"greek">;
   })
     | (GoogleFontSharedOptions & {
         font: "GFS Neohellenic",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "greek" | Array<"greek">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "greek" | Array<"greek">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ga Maamli",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gabarito",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gabriela",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gaegu",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gafata",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gajraj One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Galada",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "bengali" | "latin" | Array<"bengali" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "bengali" | "latin" | Array<"bengali" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Galdeano",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Galindo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gamja Flower",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gantari",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gasoek One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gayathri",
-       
-				weight?: "all" | 100 | 400 | 700 | Array<100 | 400 | 700> | { min: 100 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "malayalam" | Array<"latin" | "malayalam">,
+				weight?: "allSupportedWeights" | 100 | 400 | 700 | Array<100 | 400 | 700> | { min: 100 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "malayalam" | Array<"latin" | "malayalam">;
   })
     | (GoogleFontSharedOptions & {
         font: "Geist",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Geist Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gelasio",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gemunu Libre",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Genos",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cherokee" | "latin" | "latin-ext" | "vietnamese" | Array<"cherokee" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cherokee" | "latin" | "latin-ext" | "vietnamese" | Array<"cherokee" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gentium Book Plus",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gentium Plus",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Geo",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Geologica",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "CRSV" | "SHRP" | "slnt" | "wght" | Array<"CRSV" | "SHRP" | "slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "CRSV" | "SHRP" | "slnt" | "wght" | Array<"CRSV" | "SHRP" | "slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Georama",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Geostar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Geostar Fill",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Germania One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gideon Roman",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gidugu",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gilda Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Girassol",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Give You Glory",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Glass Antiqua",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Glegoo",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gloock",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gloria Hallelujah",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Glory",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gluten",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "slnt" | "wght" | Array<"slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Goblin One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gochi Hand",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Goldman",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Golos Text",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gorditas",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gothic A1",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gotu",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | "vietnamese" | Array<"devanagari" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | "vietnamese" | Array<"devanagari" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Goudy Bookletter 1911",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gowun Batang",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gowun Dodum",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Graduate",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grand Hotel",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grandiflora One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grandstander",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grape Nuts",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gravitas One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Great Vibes",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grechen Fuemen",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grenze",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grenze Gotisch",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Grey Qo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Griffy",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gruppo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gudea",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gugi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gulzar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gupter",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gurajada",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Gwendolyn",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Habibi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hachi Maru Pop",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hahmlet",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Halant",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hammersmith One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hanalei",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hanalei Fill",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Handjet",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "armenian" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "armenian" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "ELGR" | "ELSH" | "wght" | Array<"ELGR" | "ELSH" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "armenian" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "armenian" | "cyrillic" | "cyrillic-ext" | "greek" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "ELGR" | "ELSH" | "wght" | Array<"ELGR" | "ELSH" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Handlee",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hanken Grotesk",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hanuman",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Happy Monkey",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Harmattan",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Headland One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hedvig Letters Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hedvig Letters Serif",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "opsz" | Array<"opsz">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "opsz" | Array<"opsz">;
   })
     | (GoogleFontSharedOptions & {
         font: "Heebo",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Henny Penny",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hepta Slab",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Herr Von Muellerhoff",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hi Melody",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hina Mincho",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hind",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hind Guntur",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hind Madurai",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hind Mysuru",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hind Siliguri",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hind Vadodara",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Holtwood One SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Homemade Apple",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Homenaje",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Honk",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "MORF" | "SHLN" | Array<"MORF" | "SHLN">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "MORF" | "SHLN" | Array<"MORF" | "SHLN">;
   })
     | (GoogleFontSharedOptions & {
         font: "Host Grotesk",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hubballi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hubot Sans",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Hurricane",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Mono",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans Arabic",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"arabic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"arabic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans Devanagari",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic-ext" | "devanagari" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic-ext" | "devanagari" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans Hebrew",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans JP",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans KR",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans Thai",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "thai" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "thai">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "thai" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "thai">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Sans Thai Looped",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "thai" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "thai">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "thai" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "thai">;
   })
     | (GoogleFontSharedOptions & {
         font: "IBM Plex Serif",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell DW Pica",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell DW Pica SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell Double Pica",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell Double Pica SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell English",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell English SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell French Canon",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell French Canon SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell Great Primer",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "IM Fell Great Primer SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ibarra Real Nova",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Iceberg",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Iceland",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Imbue",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Imperial Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Imprima",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inclusive Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inconsolata",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inder",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Indie Flower",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ingrid Darling",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inika",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inknut Antiqua",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inria Sans",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inria Serif",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inspiration",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Instrument Sans",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Instrument Serif",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inter",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Inter Tight",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Irish Grover",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Island Moments",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Istok Web",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Italiana",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Italianno",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Itim",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacquard 12",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacquard 12 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacquard 24",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacquard 24 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacquarda Bastarda 9",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacquarda Bastarda 9 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacques Francois",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jacques Francois Shadow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jaini",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jaini Purva",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jaldi",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jaro",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | Array<"opsz">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | Array<"opsz">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 10",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 10 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 15",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 15 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 20",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 20 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 25",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jersey 25 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "JetBrains Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jim Nightshade",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Joan",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jockey One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jolly Lodger",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jomhuria",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jomolhari",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "tibetan" | Array<"latin" | "tibetan">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "tibetan" | Array<"latin" | "tibetan">;
   })
     | (GoogleFontSharedOptions & {
         font: "Josefin Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Josefin Slab",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jost",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Joti One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jua",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Judson",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Julee",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Julius Sans One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Junge",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Jura",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "kayah-li" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "kayah-li" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "kayah-li" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "kayah-li" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Just Another Hand",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Just Me Again Down Here",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "K2D",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kablammo",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "MORF" | Array<"MORF">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "MORF" | Array<"MORF">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kadwa",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kaisei Decol",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kaisei HarunoUmi",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kaisei Opti",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kaisei Tokumin",
-       
-				weight?: "all" | 400 | 500 | 700 | 800 | Array<400 | 500 | 700 | 800> | { min: 400 | 500 | 700, max: 500 | 700 | 800 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | 800 | Array<400 | 500 | 700 | 800> | { min: 400 | 500 | 700, max: 500 | 700 | 800 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kalam",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kalnia",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "math" | Array<"latin" | "latin-ext" | "math">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "math" | Array<"latin" | "latin-ext" | "math">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kalnia Glaze",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kameron",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kanit",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kantumruy Pro",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Karantina",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Karla",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Karla Tamil Inclined",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "tamil" | Array<"tamil">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "tamil" | Array<"tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Karla Tamil Upright",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "tamil" | Array<"tamil">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "tamil" | Array<"tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Karma",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Katibeh",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kaushan Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kavivanar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kavoon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kay Pho Du",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "kayah-li" | "latin" | "latin-ext" | Array<"kayah-li" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "kayah-li" | "latin" | "latin-ext" | Array<"kayah-li" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kdam Thmor Pro",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Keania One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kelly Slab",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kenia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Khand",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Khmer",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | Array<"khmer">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | Array<"khmer">;
   })
     | (GoogleFontSharedOptions & {
         font: "Khula",
-       
-				weight?: "all" | 300 | 400 | 600 | 700 | 800 | Array<300 | 400 | 600 | 700 | 800> | { min: 300 | 400 | 600 | 700, max: 400 | 600 | 700 | 800 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 600 | 700 | 800 | Array<300 | 400 | 600 | 700 | 800> | { min: 300 | 400 | 600 | 700, max: 400 | 600 | 700 | 800 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kings",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kirang Haerang",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kite One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kiwi Maru",
-       
-				weight?: "all" | 300 | 400 | 500 | Array<300 | 400 | 500> | { min: 300 | 400, max: 400 | 500 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | Array<300 | 400 | 500> | { min: 300 | 400, max: 400 | 500 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Klee One",
-       
-				weight?: "all" | 400 | 600 | Array<400 | 600> | { min: 400, max: 600 }
-				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 600 | Array<400 | 600> | { min: 400, max: 600 }
+				subsets?: "all" | "cyrillic" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Knewave",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "KoHo",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kodchasan",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kode Mono",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Koh Santepheap",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kolker Brush",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Konkhmer Sleokchher",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kosugi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kosugi Maru",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kotta One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Koulen",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kranky",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kreon",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kristi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Krona One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Krub",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kufam",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kulim Park",
-       
-				weight?: "all" | 200 | 300 | 400 | 600 | 700 | Array<200 | 300 | 400 | 600 | 700> | { min: 200 | 300 | 400 | 600, max: 300 | 400 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 600 | 700 | Array<200 | 300 | 400 | 600 | 700> | { min: 200 | 300 | 400 | 600, max: 300 | 400 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 600 | 700 | Array<200 | 300 | 400 | 600 | 700> | { min: 200 | 300 | 400 | 600, max: 300 | 400 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 600 | 700 | Array<200 | 300 | 400 | 600 | 700> | { min: 200 | 300 | 400 | 600, max: 300 | 400 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kumar One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kumar One Outline",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kumbh Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "YOPQ" | "wght" | Array<"YOPQ" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "YOPQ" | "wght" | Array<"YOPQ" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Kurale",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "devanagari" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "devanagari" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "LXGW WenKai Mono TC",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "LXGW WenKai TC",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "lisu" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "La Belle Aurore",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Labrada",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lacquer",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Laila",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lakki Reddy",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lalezar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lancelot",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Langar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lateef",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lato",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
-				italic?: "all" | boolean | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lavishly Yours",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "League Gothic",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | Array<"wdth">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | Array<"wdth">;
   })
     | (GoogleFontSharedOptions & {
         font: "League Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "League Spartan",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Leckerli One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ledger",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lekton",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lemon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lemonada",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Deca",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Exa",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Giga",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Mega",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Peta",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Tera",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lexend Zetta",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode 128",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode 128 Text",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode 39",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode 39 Extended",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode 39 Extended Text",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode 39 Text",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Barcode EAN13 Text",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Baskerville",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Bodoni",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Caslon Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Caslon Text",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Libre Franklin",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Licorice",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Life Savers",
-       
-				weight?: "all" | 400 | 700 | 800 | Array<400 | 700 | 800> | { min: 400 | 700, max: 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | 800 | Array<400 | 700 | 800> | { min: 400 | 700, max: 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lilita One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lily Script One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Limelight",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Linden Hill",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Linefont",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lisu Bosa",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "lisu" | Array<"latin" | "latin-ext" | "lisu">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "lisu" | Array<"latin" | "latin-ext" | "lisu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Literata",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Liu Jian Mao Cao",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Livvic",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lobster",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lobster Two",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Londrina Outline",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Londrina Shadow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Londrina Sketch",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Londrina Solid",
-       
-				weight?: "all" | 100 | 300 | 400 | 900 | Array<100 | 300 | 400 | 900> | { min: 100 | 300 | 400, max: 300 | 400 | 900 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 900 | Array<100 | 300 | 400 | 900> | { min: 100 | 300 | 400, max: 300 | 400 | 900 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Long Cang",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lora",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Love Light",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Love Ya Like A Sister",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Loved by the King",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lovers Quarrel",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Luckiest Guy",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lugrasimo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lumanosimo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lunasima",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lusitana",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Lustria",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Luxurious Roman",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Luxurious Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "M PLUS 1",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "M PLUS 1 Code",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "M PLUS 1p",
-       
-				weight?: "all" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "M PLUS 2",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "M PLUS Code Latin",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "M PLUS Rounded 1c",
-       
-				weight?: "all" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 500 | 700 | 800 | 900 | Array<100 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 100 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ma Shan Zheng",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Macondo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Macondo Swash Caps",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mada",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Madimi One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Magra",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Maiden Orange",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Maitree",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Major Mono Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mako",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mali",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mallanna",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Maname",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | "vietnamese" | Array<"latin" | "latin-ext" | "sinhala" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | "vietnamese" | Array<"latin" | "latin-ext" | "sinhala" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mandali",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Manjari",
-       
-				weight?: "all" | 100 | 400 | 700 | Array<100 | 400 | 700> | { min: 100 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">,
+				weight?: "allSupportedWeights" | 100 | 400 | 700 | Array<100 | 400 | 700> | { min: 100 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">;
   })
     | (GoogleFontSharedOptions & {
         font: "Manrope",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mansalva",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"greek" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"greek" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Manuale",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marcellus",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marcellus SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marck Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Margarine",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marhey",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Markazi Text",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marko One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marmelad",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Martel",
-       
-				weight?: "all" | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 600 | 700 | 800, max: 300 | 400 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 600 | 700 | 800, max: 300 | 400 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Martel Sans",
-       
-				weight?: "all" | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 600 | 700 | 800, max: 300 | 400 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 600 | 700 | 800, max: 300 | 400 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Martian Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Marvel",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mate",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mate SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Matemasie",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Maven Pro",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "McLaren",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mea Culpa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Meddon",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "MedievalSharp",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Medula One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Meera Inimai",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "tamil" | Array<"latin" | "tamil">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "tamil" | Array<"latin" | "tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Megrim",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Meie Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Meow Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Merienda",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Merriweather",
-       
-				weight?: "all" | 300 | 400 | 700 | 900 | Array<300 | 400 | 700 | 900> | { min: 300 | 400 | 700, max: 400 | 700 | 900 }
-				italic?: "all" | boolean | 300 | 400 | 700 | 900 | Array<300 | 400 | 700 | 900> | { min: 300 | 400 | 700, max: 400 | 700 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | 900 | Array<300 | 400 | 700 | 900> | { min: 300 | 400 | 700, max: 400 | 700 | 900 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 700 | 900 | Array<300 | 400 | 700 | 900> | { min: 300 | 400 | 700, max: 400 | 700 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Merriweather Sans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Metal",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Metal Mania",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Metamorphous",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Metrophobic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Michroma",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Micro 5",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Micro 5 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Milonga",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Miltonian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Miltonian Tattoo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mina",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mingzat",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "lepcha" | Array<"latin" | "latin-ext" | "lepcha">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "lepcha" | Array<"latin" | "latin-ext" | "lepcha">;
   })
     | (GoogleFontSharedOptions & {
         font: "Miniver",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Miriam Libre",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mirza",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Miss Fajardose",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mitr",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mochiy Pop One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mochiy Pop P One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Modak",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Modern Antiqua",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Moderustic",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mogra",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mohave",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Moirai One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Molengo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Molle",
-       
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mona Sans",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Monda",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Monofett",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Monomaniac One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Monoton",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Monsieur La Doulaise",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montaga",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montagu Slab",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "MonteCarlo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montez",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montserrat",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montserrat Alternates",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montserrat Subrayada",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Montserrat Underline",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Moo Lah Lah",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mooli",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Moon Dance",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Moul",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Moulpali",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mountains of Christmas",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mouse Memoirs",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mr Bedfort",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mr Dafoe",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mr De Haviland",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mrs Saint Delafield",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mrs Sheppards",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ms Madi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mukta",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mukta Mahee",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mukta Malar",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mukta Vaani",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mulish",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Murecho",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "MuseoModerno",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "My Soul",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mynerve",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"greek" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"greek" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Mystery Quest",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "NTR",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nabla",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "math" | "vietnamese">,
-				axes?: "all" | "EDPT" | "EHLT" | Array<"EDPT" | "EHLT">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "math" | "vietnamese">;
+				axes?: "all" | "EDPT" | "EHLT" | Array<"EDPT" | "EHLT">;
   })
     | (GoogleFontSharedOptions & {
         font: "Namdhinggo",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "limbu" | Array<"latin" | "latin-ext" | "limbu">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "limbu" | Array<"latin" | "latin-ext" | "limbu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nanum Brush Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nanum Gothic",
-       
-				weight?: "all" | 400 | 700 | 800 | Array<400 | 700 | 800> | { min: 400 | 700, max: 700 | 800 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | 800 | Array<400 | 700 | 800> | { min: 400 | 700, max: 700 | 800 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nanum Gothic Coding",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nanum Myeongjo",
-       
-				weight?: "all" | 400 | 700 | 800 | Array<400 | 700 | 800> | { min: 400 | 700, max: 700 | 800 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | 800 | Array<400 | 700 | 800> | { min: 400 | 700, max: 700 | 800 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nanum Pen Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Narnoor",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "gunjala-gondi" | "latin" | "latin-ext" | "math" | "symbols" | Array<"gunjala-gondi" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "gunjala-gondi" | "latin" | "latin-ext" | "math" | "symbols" | Array<"gunjala-gondi" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Neonderthaw",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nerko One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Neucha",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | Array<"cyrillic" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | Array<"cyrillic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Neuton",
-       
-				weight?: "all" | 200 | 300 | 400 | 700 | 800 | Array<200 | 300 | 400 | 700 | 800> | { min: 200 | 300 | 400 | 700, max: 300 | 400 | 700 | 800 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 700 | 800 | Array<200 | 300 | 400 | 700 | 800> | { min: 200 | 300 | 400 | 700, max: 300 | 400 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "New Amsterdam",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "New Rocker",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "New Tegomin",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "News Cycle",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Newsreader",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Niconne",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Niramit",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nixie One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nobile",
-       
-				weight?: "all" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 700 | Array<400 | 500 | 700> | { min: 400 | 500, max: 500 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nokora",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Norican",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nosifer",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Notable",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nothing You Could Do",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noticia Text",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Color Emoji",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "emoji" | Array<"emoji">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "emoji" | Array<"emoji">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Emoji",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "emoji" | Array<"emoji">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "emoji" | Array<"emoji">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Kufi Arabic",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"arabic" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"arabic" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Music",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "music" | Array<"latin" | "latin-ext" | "music">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "music" | Array<"latin" | "latin-ext" | "music">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Naskh Arabic",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"arabic" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"arabic" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Nastaliq Urdu",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Rashi Hebrew",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | Array<"greek-ext" | "hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | Array<"greek-ext" | "hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "devanagari" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Adlam",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "adlam" | "latin" | "latin-ext" | Array<"adlam" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "adlam" | "latin" | "latin-ext" | Array<"adlam" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Adlam Unjoined",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "adlam" | "latin" | "latin-ext" | Array<"adlam" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "adlam" | "latin" | "latin-ext" | Array<"adlam" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Anatolian Hieroglyphs",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "anatolian-hieroglyphs" | "latin" | "latin-ext" | Array<"anatolian-hieroglyphs" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "anatolian-hieroglyphs" | "latin" | "latin-ext" | Array<"anatolian-hieroglyphs" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Arabic",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | Array<"arabic">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | Array<"arabic">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Armenian",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "armenian" | "latin" | "latin-ext" | Array<"armenian" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "armenian" | "latin" | "latin-ext" | Array<"armenian" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Avestan",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "avestan" | "latin" | "latin-ext" | Array<"avestan" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "avestan" | "latin" | "latin-ext" | Array<"avestan" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Balinese",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "balinese" | "latin" | "latin-ext" | Array<"balinese" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "balinese" | "latin" | "latin-ext" | Array<"balinese" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Bamum",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "bamum" | "latin" | "latin-ext" | Array<"bamum" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "bamum" | "latin" | "latin-ext" | Array<"bamum" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Bassa Vah",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "bassa-vah" | "latin" | "latin-ext" | Array<"bassa-vah" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "bassa-vah" | "latin" | "latin-ext" | Array<"bassa-vah" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Batak",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "batak" | "latin" | "latin-ext" | Array<"batak" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "batak" | "latin" | "latin-ext" | Array<"batak" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Bengali",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Bhaiksuki",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "bhaiksuki" | "latin" | "latin-ext" | Array<"bhaiksuki" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "bhaiksuki" | "latin" | "latin-ext" | Array<"bhaiksuki" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Brahmi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "brahmi" | "latin" | "latin-ext" | "math" | "symbols" | Array<"brahmi" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "brahmi" | "latin" | "latin-ext" | "math" | "symbols" | Array<"brahmi" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Buginese",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "buginese" | "latin" | "latin-ext" | Array<"buginese" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "buginese" | "latin" | "latin-ext" | Array<"buginese" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Buhid",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "buhid" | "latin" | "latin-ext" | Array<"buhid" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "buhid" | "latin" | "latin-ext" | Array<"buhid" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Canadian Aboriginal",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "canadian-aboriginal" | "latin" | "latin-ext" | "math" | "symbols" | Array<"canadian-aboriginal" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "canadian-aboriginal" | "latin" | "latin-ext" | "math" | "symbols" | Array<"canadian-aboriginal" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Carian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "carian" | "latin" | "latin-ext" | Array<"carian" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "carian" | "latin" | "latin-ext" | Array<"carian" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Caucasian Albanian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "caucasian-albanian" | "latin" | "latin-ext" | Array<"caucasian-albanian" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "caucasian-albanian" | "latin" | "latin-ext" | Array<"caucasian-albanian" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Chakma",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "chakma" | "latin" | "latin-ext" | Array<"chakma" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "chakma" | "latin" | "latin-ext" | Array<"chakma" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Cham",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cham" | "latin" | "latin-ext" | Array<"cham" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cham" | "latin" | "latin-ext" | Array<"cham" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Cherokee",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cherokee" | "latin" | "latin-ext" | Array<"cherokee" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cherokee" | "latin" | "latin-ext" | Array<"cherokee" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Chorasmian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "chorasmian" | "latin" | "latin-ext" | "math" | "symbols" | Array<"chorasmian" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "chorasmian" | "latin" | "latin-ext" | "math" | "symbols" | Array<"chorasmian" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Coptic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "coptic" | "latin" | "latin-ext" | Array<"coptic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "coptic" | "latin" | "latin-ext" | Array<"coptic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Cuneiform",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cuneiform" | "latin" | "latin-ext" | Array<"cuneiform" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cuneiform" | "latin" | "latin-ext" | Array<"cuneiform" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Cypriot",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cypriot" | "latin" | "latin-ext" | Array<"cypriot" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cypriot" | "latin" | "latin-ext" | Array<"cypriot" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Cypro Minoan",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cypro-minoan" | "latin" | "latin-ext" | Array<"cypro-minoan" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cypro-minoan" | "latin" | "latin-ext" | Array<"cypro-minoan" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Deseret",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "deseret" | "latin" | "latin-ext" | Array<"deseret" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "deseret" | "latin" | "latin-ext" | Array<"deseret" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Devanagari",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Display",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Duployan",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "duployan" | "latin" | "latin-ext" | Array<"duployan" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "duployan" | "latin" | "latin-ext" | Array<"duployan" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Egyptian Hieroglyphs",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "egyptian-hieroglyphs" | "latin" | "latin-ext" | Array<"egyptian-hieroglyphs" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "egyptian-hieroglyphs" | "latin" | "latin-ext" | Array<"egyptian-hieroglyphs" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Elbasan",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "elbasan" | "latin" | "latin-ext" | Array<"elbasan" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "elbasan" | "latin" | "latin-ext" | Array<"elbasan" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Elymaic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "elymaic" | "latin" | "latin-ext" | Array<"elymaic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "elymaic" | "latin" | "latin-ext" | Array<"elymaic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Ethiopic",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "ethiopic" | "latin" | "latin-ext" | Array<"ethiopic" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "ethiopic" | "latin" | "latin-ext" | Array<"ethiopic" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Georgian",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic-ext" | "georgian" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic-ext" | "georgian" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic-ext" | "georgian" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic-ext" | "georgian" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Glagolitic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "glagolitic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic-ext" | "glagolitic" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "glagolitic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic-ext" | "glagolitic" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Gothic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gothic" | "latin" | "latin-ext" | Array<"gothic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gothic" | "latin" | "latin-ext" | Array<"gothic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Grantha",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "grantha" | "latin" | "latin-ext" | Array<"grantha" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "grantha" | "latin" | "latin-ext" | Array<"grantha" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Gujarati",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "math" | "symbols" | Array<"gujarati" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "math" | "symbols" | Array<"gujarati" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Gunjala Gondi",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "gunjala-gondi" | "latin" | "latin-ext" | Array<"gunjala-gondi" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "gunjala-gondi" | "latin" | "latin-ext" | Array<"gunjala-gondi" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Gurmukhi",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans HK",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Hanifi Rohingya",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "hanifi-rohingya" | "latin" | "latin-ext" | Array<"hanifi-rohingya" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "hanifi-rohingya" | "latin" | "latin-ext" | Array<"hanifi-rohingya" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Hanunoo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hanunoo" | "latin" | "latin-ext" | Array<"hanunoo" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hanunoo" | "latin" | "latin-ext" | Array<"hanunoo" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Hatran",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hatran" | "latin" | "latin-ext" | Array<"hatran" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hatran" | "latin" | "latin-ext" | Array<"hatran" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Hebrew",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic-ext" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "greek-ext" | "hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic-ext" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic-ext" | "greek-ext" | "hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Imperial Aramaic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "imperial-aramaic" | "latin" | "latin-ext" | Array<"imperial-aramaic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "imperial-aramaic" | "latin" | "latin-ext" | Array<"imperial-aramaic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Indic Siyaq Numbers",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "indic-siyaq-numbers" | "latin" | "latin-ext" | Array<"indic-siyaq-numbers" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "indic-siyaq-numbers" | "latin" | "latin-ext" | Array<"indic-siyaq-numbers" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Inscriptional Pahlavi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "inscriptional-pahlavi" | "latin" | "latin-ext" | Array<"inscriptional-pahlavi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "inscriptional-pahlavi" | "latin" | "latin-ext" | Array<"inscriptional-pahlavi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Inscriptional Parthian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "inscriptional-parthian" | "latin" | "latin-ext" | Array<"inscriptional-parthian" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "inscriptional-parthian" | "latin" | "latin-ext" | Array<"inscriptional-parthian" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans JP",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Javanese",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "javanese" | "latin" | "latin-ext" | Array<"javanese" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "javanese" | "latin" | "latin-ext" | Array<"javanese" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans KR",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Kaithi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "kaithi" | "latin" | "latin-ext" | Array<"kaithi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "kaithi" | "latin" | "latin-ext" | Array<"kaithi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Kannada",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Kawi",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "kawi" | "latin" | "latin-ext" | Array<"kawi" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "kawi" | "latin" | "latin-ext" | Array<"kawi" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Kayah Li",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "kayah-li" | "latin" | "latin-ext" | Array<"kayah-li" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "kayah-li" | "latin" | "latin-ext" | Array<"kayah-li" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Kharoshthi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "kharoshthi" | "latin" | "latin-ext" | Array<"kharoshthi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "kharoshthi" | "latin" | "latin-ext" | Array<"kharoshthi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Khmer",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Khojki",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khojki" | "latin" | "latin-ext" | Array<"khojki" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khojki" | "latin" | "latin-ext" | Array<"khojki" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Khudawadi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khudawadi" | "latin" | "latin-ext" | Array<"khudawadi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khudawadi" | "latin" | "latin-ext" | Array<"khudawadi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Lao",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "lao" | "latin" | "latin-ext" | Array<"lao" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "lao" | "latin" | "latin-ext" | Array<"lao" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Lao Looped",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "lao" | "latin" | "latin-ext" | Array<"lao" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "lao" | "latin" | "latin-ext" | Array<"lao" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Lepcha",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "lepcha" | Array<"latin" | "latin-ext" | "lepcha">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "lepcha" | Array<"latin" | "latin-ext" | "lepcha">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Limbu",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "limbu" | Array<"latin" | "latin-ext" | "limbu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "limbu" | Array<"latin" | "latin-ext" | "limbu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Linear A",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "linear-a" | Array<"latin" | "latin-ext" | "linear-a">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "linear-a" | Array<"latin" | "latin-ext" | "linear-a">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Linear B",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "linear-b" | Array<"latin" | "latin-ext" | "linear-b">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "linear-b" | Array<"latin" | "latin-ext" | "linear-b">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Lisu",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "lisu" | Array<"latin" | "latin-ext" | "lisu">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "lisu" | Array<"latin" | "latin-ext" | "lisu">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Lycian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "lycian" | Array<"lycian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "lycian" | Array<"lycian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Lydian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "lydian" | Array<"latin" | "latin-ext" | "lydian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "lydian" | Array<"latin" | "latin-ext" | "lydian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mahajani",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "mahajani" | Array<"latin" | "latin-ext" | "mahajani">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "mahajani" | Array<"latin" | "latin-ext" | "mahajani">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Malayalam",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mandaic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "mandaic" | Array<"latin" | "latin-ext" | "mandaic">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "mandaic" | Array<"latin" | "latin-ext" | "mandaic">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Manichaean",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "manichaean" | Array<"latin" | "latin-ext" | "manichaean">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "manichaean" | Array<"latin" | "latin-ext" | "manichaean">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Marchen",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "marchen" | Array<"latin" | "latin-ext" | "marchen">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "marchen" | Array<"latin" | "latin-ext" | "marchen">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Masaram Gondi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "masaram-gondi" | Array<"latin" | "latin-ext" | "masaram-gondi">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "masaram-gondi" | Array<"latin" | "latin-ext" | "masaram-gondi">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Math",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "math" | Array<"math">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "math" | Array<"math">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mayan Numerals",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "mayan-numerals" | Array<"latin" | "latin-ext" | "mayan-numerals">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "mayan-numerals" | Array<"latin" | "latin-ext" | "mayan-numerals">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Medefaidrin",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "medefaidrin" | Array<"latin" | "latin-ext" | "medefaidrin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "medefaidrin" | Array<"latin" | "latin-ext" | "medefaidrin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Meetei Mayek",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "meetei-mayek" | Array<"latin" | "latin-ext" | "meetei-mayek">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "meetei-mayek" | Array<"latin" | "latin-ext" | "meetei-mayek">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mende Kikakui",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "mende-kikakui" | Array<"latin" | "latin-ext" | "mende-kikakui">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "mende-kikakui" | Array<"latin" | "latin-ext" | "mende-kikakui">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Meroitic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "meroitic" | "meroitic-cursive" | "meroitic-hieroglyphs" | Array<"latin" | "latin-ext" | "meroitic" | "meroitic-cursive" | "meroitic-hieroglyphs">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "meroitic" | "meroitic-cursive" | "meroitic-hieroglyphs" | Array<"latin" | "latin-ext" | "meroitic" | "meroitic-cursive" | "meroitic-hieroglyphs">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Miao",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "miao" | Array<"latin" | "latin-ext" | "miao">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "miao" | Array<"latin" | "latin-ext" | "miao">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Modi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "modi" | Array<"latin" | "latin-ext" | "modi">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "modi" | Array<"latin" | "latin-ext" | "modi">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mongolian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "mongolian" | "symbols" | Array<"latin" | "latin-ext" | "math" | "mongolian" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "mongolian" | "symbols" | Array<"latin" | "latin-ext" | "math" | "mongolian" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Mro",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "mro" | Array<"latin" | "latin-ext" | "mro">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "mro" | Array<"latin" | "latin-ext" | "mro">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Multani",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "multani" | Array<"latin" | "latin-ext" | "multani">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "multani" | Array<"latin" | "latin-ext" | "multani">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Myanmar",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "myanmar" | Array<"myanmar">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "myanmar" | Array<"myanmar">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans NKo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "nko" | Array<"latin" | "latin-ext" | "nko">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "nko" | Array<"latin" | "latin-ext" | "nko">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans NKo Unjoined",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "nko" | Array<"latin" | "latin-ext" | "nko">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "nko" | Array<"latin" | "latin-ext" | "nko">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Nabataean",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "nabataean" | Array<"latin" | "latin-ext" | "nabataean">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "nabataean" | Array<"latin" | "latin-ext" | "nabataean">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Nag Mundari",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "nag-mundari" | Array<"latin" | "latin-ext" | "nag-mundari">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "nag-mundari" | Array<"latin" | "latin-ext" | "nag-mundari">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Nandinagari",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "nandinagari" | Array<"latin" | "latin-ext" | "nandinagari">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "nandinagari" | Array<"latin" | "latin-ext" | "nandinagari">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans New Tai Lue",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "new-tai-lue" | Array<"latin" | "latin-ext" | "new-tai-lue">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "new-tai-lue" | Array<"latin" | "latin-ext" | "new-tai-lue">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Newa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "newa" | Array<"latin" | "latin-ext" | "newa">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "newa" | Array<"latin" | "latin-ext" | "newa">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Nushu",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "nushu" | Array<"latin" | "latin-ext" | "nushu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "nushu" | Array<"latin" | "latin-ext" | "nushu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Ogham",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "ogham" | Array<"latin" | "latin-ext" | "ogham">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "ogham" | Array<"latin" | "latin-ext" | "ogham">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Ol Chiki",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "ol-chiki" | Array<"latin" | "latin-ext" | "ol-chiki">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "ol-chiki" | Array<"latin" | "latin-ext" | "ol-chiki">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old Hungarian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-hungarian" | Array<"latin" | "latin-ext" | "old-hungarian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-hungarian" | Array<"latin" | "latin-ext" | "old-hungarian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old Italic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-italic" | Array<"latin" | "latin-ext" | "old-italic">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-italic" | Array<"latin" | "latin-ext" | "old-italic">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old North Arabian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-north-arabian" | Array<"latin" | "latin-ext" | "old-north-arabian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-north-arabian" | Array<"latin" | "latin-ext" | "old-north-arabian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old Permic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "old-permic" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "old-permic">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "old-permic" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "old-permic">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old Persian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-persian" | Array<"latin" | "latin-ext" | "old-persian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-persian" | Array<"latin" | "latin-ext" | "old-persian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old Sogdian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-sogdian" | Array<"latin" | "latin-ext" | "old-sogdian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-sogdian" | Array<"latin" | "latin-ext" | "old-sogdian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old South Arabian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-south-arabian" | Array<"latin" | "latin-ext" | "old-south-arabian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-south-arabian" | Array<"latin" | "latin-ext" | "old-south-arabian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Old Turkic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-turkic" | Array<"latin" | "latin-ext" | "old-turkic">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-turkic" | Array<"latin" | "latin-ext" | "old-turkic">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Oriya",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "oriya" | Array<"latin" | "latin-ext" | "oriya">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "oriya" | Array<"latin" | "latin-ext" | "oriya">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Osage",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "osage" | Array<"latin" | "latin-ext" | "osage">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "osage" | Array<"latin" | "latin-ext" | "osage">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Osmanya",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "osmanya" | Array<"latin" | "latin-ext" | "osmanya">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "osmanya" | Array<"latin" | "latin-ext" | "osmanya">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Pahawh Hmong",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "pahawh-hmong" | Array<"latin" | "latin-ext" | "pahawh-hmong">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "pahawh-hmong" | Array<"latin" | "latin-ext" | "pahawh-hmong">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Palmyrene",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "palmyrene" | Array<"latin" | "latin-ext" | "palmyrene">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "palmyrene" | Array<"latin" | "latin-ext" | "palmyrene">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Pau Cin Hau",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "pau-cin-hau" | Array<"latin" | "latin-ext" | "pau-cin-hau">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "pau-cin-hau" | Array<"latin" | "latin-ext" | "pau-cin-hau">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans PhagsPa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "phags-pa" | "symbols" | Array<"latin" | "latin-ext" | "math" | "phags-pa" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "phags-pa" | "symbols" | Array<"latin" | "latin-ext" | "math" | "phags-pa" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Phoenician",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "phoenician" | Array<"latin" | "latin-ext" | "phoenician">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "phoenician" | Array<"latin" | "latin-ext" | "phoenician">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Psalter Pahlavi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "psalter-pahlavi" | Array<"latin" | "latin-ext" | "psalter-pahlavi">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "psalter-pahlavi" | Array<"latin" | "latin-ext" | "psalter-pahlavi">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Rejang",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "rejang" | Array<"latin" | "latin-ext" | "rejang">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "rejang" | Array<"latin" | "latin-ext" | "rejang">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Runic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "runic" | Array<"latin" | "latin-ext" | "runic">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "runic" | Array<"latin" | "latin-ext" | "runic">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans SC",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Samaritan",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "samaritan" | Array<"latin" | "latin-ext" | "samaritan">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "samaritan" | Array<"latin" | "latin-ext" | "samaritan">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Saurashtra",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "saurashtra" | Array<"latin" | "latin-ext" | "saurashtra">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "saurashtra" | Array<"latin" | "latin-ext" | "saurashtra">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Sharada",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "sharada" | Array<"latin" | "latin-ext" | "sharada">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "sharada" | Array<"latin" | "latin-ext" | "sharada">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Shavian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "shavian" | Array<"latin" | "latin-ext" | "shavian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "shavian" | Array<"latin" | "latin-ext" | "shavian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Siddham",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "siddham" | Array<"latin" | "latin-ext" | "siddham">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "siddham" | Array<"latin" | "latin-ext" | "siddham">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans SignWriting",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "signwriting" | Array<"latin" | "latin-ext" | "signwriting">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "signwriting" | Array<"latin" | "latin-ext" | "signwriting">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Sinhala",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Sogdian",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "sogdian" | Array<"latin" | "latin-ext" | "sogdian">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "sogdian" | Array<"latin" | "latin-ext" | "sogdian">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Sora Sompeng",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "sora-sompeng" | Array<"latin" | "latin-ext" | "sora-sompeng">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "sora-sompeng" | Array<"latin" | "latin-ext" | "sora-sompeng">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Soyombo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "soyombo" | Array<"latin" | "latin-ext" | "soyombo">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "soyombo" | Array<"latin" | "latin-ext" | "soyombo">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Sundanese",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "sundanese" | Array<"latin" | "latin-ext" | "sundanese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "sundanese" | Array<"latin" | "latin-ext" | "sundanese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Syloti Nagri",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "syloti-nagri" | Array<"latin" | "latin-ext" | "syloti-nagri">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "syloti-nagri" | Array<"latin" | "latin-ext" | "syloti-nagri">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Symbols",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "symbols" | Array<"latin" | "latin-ext" | "symbols">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "symbols" | Array<"latin" | "latin-ext" | "symbols">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Symbols 2",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "braille" | "latin" | "latin-ext" | "math" | "mayan-numerals" | "symbols" | Array<"braille" | "latin" | "latin-ext" | "math" | "mayan-numerals" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "braille" | "latin" | "latin-ext" | "math" | "mayan-numerals" | "symbols" | Array<"braille" | "latin" | "latin-ext" | "math" | "mayan-numerals" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Syriac",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "syriac" | Array<"latin" | "latin-ext" | "syriac">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "syriac" | Array<"latin" | "latin-ext" | "syriac">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Syriac Eastern",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "syriac" | Array<"latin" | "latin-ext" | "syriac">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "syriac" | Array<"latin" | "latin-ext" | "syriac">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans TC",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tagalog",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tagalog" | Array<"latin" | "latin-ext" | "tagalog">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tagalog" | Array<"latin" | "latin-ext" | "tagalog">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tagbanwa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tagbanwa" | Array<"latin" | "latin-ext" | "tagbanwa">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tagbanwa" | Array<"latin" | "latin-ext" | "tagbanwa">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tai Le",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tai-le" | Array<"latin" | "latin-ext" | "tai-le">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tai-le" | Array<"latin" | "latin-ext" | "tai-le">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tai Tham",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "tai-tham" | Array<"latin" | "latin-ext" | "tai-tham">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "tai-tham" | Array<"latin" | "latin-ext" | "tai-tham">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tai Viet",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tai-viet" | Array<"latin" | "latin-ext" | "tai-viet">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tai-viet" | Array<"latin" | "latin-ext" | "tai-viet">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Takri",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "takri" | Array<"latin" | "latin-ext" | "takri">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "takri" | Array<"latin" | "latin-ext" | "takri">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tamil",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tamil Supplement",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tamil-supplement" | Array<"latin" | "latin-ext" | "tamil-supplement">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tamil-supplement" | Array<"latin" | "latin-ext" | "tamil-supplement">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tangsa",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "tangsa" | Array<"latin" | "latin-ext" | "tangsa">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "tangsa" | Array<"latin" | "latin-ext" | "tangsa">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Telugu",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Thaana",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "thaana" | Array<"latin" | "latin-ext" | "thaana">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "thaana" | Array<"latin" | "latin-ext" | "thaana">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Thai",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | Array<"latin" | "latin-ext" | "thai">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | Array<"latin" | "latin-ext" | "thai">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Thai Looped",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | Array<"latin" | "latin-ext" | "thai">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | Array<"latin" | "latin-ext" | "thai">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tifinagh",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tifinagh" | Array<"latin" | "latin-ext" | "tifinagh">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tifinagh" | Array<"latin" | "latin-ext" | "tifinagh">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Tirhuta",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tirhuta" | Array<"latin" | "latin-ext" | "tirhuta">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tirhuta" | Array<"latin" | "latin-ext" | "tirhuta">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Ugaritic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "ugaritic" | Array<"latin" | "latin-ext" | "ugaritic">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "ugaritic" | Array<"latin" | "latin-ext" | "ugaritic">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Vai",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vai" | Array<"latin" | "latin-ext" | "vai">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vai" | Array<"latin" | "latin-ext" | "vai">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Vithkuqi",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vithkuqi" | Array<"latin" | "latin-ext" | "vithkuqi">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vithkuqi" | Array<"latin" | "latin-ext" | "vithkuqi">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Wancho",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "wancho" | Array<"latin" | "latin-ext" | "wancho">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "wancho" | Array<"latin" | "latin-ext" | "wancho">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Warang Citi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "warang-citi" | Array<"latin" | "latin-ext" | "warang-citi">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "warang-citi" | Array<"latin" | "latin-ext" | "warang-citi">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Yi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "yi" | Array<"latin" | "latin-ext" | "yi">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "yi" | Array<"latin" | "latin-ext" | "yi">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Sans Zanabazar Square",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "zanabazar-square" | Array<"latin" | "latin-ext" | "zanabazar-square">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "zanabazar-square" | Array<"latin" | "latin-ext" | "zanabazar-square">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Ahom",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "ahom" | "latin" | "latin-ext" | Array<"ahom" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "ahom" | "latin" | "latin-ext" | Array<"ahom" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Armenian",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "armenian" | "latin" | "latin-ext" | Array<"armenian" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "armenian" | "latin" | "latin-ext" | Array<"armenian" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Balinese",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "balinese" | "latin" | "latin-ext" | Array<"balinese" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "balinese" | "latin" | "latin-ext" | Array<"balinese" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Bengali",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Devanagari",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Display",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Dogra",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "dogra" | "latin" | "latin-ext" | Array<"dogra" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "dogra" | "latin" | "latin-ext" | Array<"dogra" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Ethiopic",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "ethiopic" | "latin" | "latin-ext" | Array<"ethiopic" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "ethiopic" | "latin" | "latin-ext" | Array<"ethiopic" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Georgian",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "georgian" | "latin" | "latin-ext" | Array<"georgian" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "georgian" | "latin" | "latin-ext" | Array<"georgian" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Grantha",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "grantha" | "latin" | "latin-ext" | Array<"grantha" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "grantha" | "latin" | "latin-ext" | Array<"grantha" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Gujarati",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "math" | "symbols" | Array<"gujarati" | "latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "math" | "symbols" | Array<"gujarati" | "latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Gurmukhi",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif HK",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Hebrew",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif JP",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif KR",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Kannada",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Khitan Small Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khitan-small-script" | "latin" | "latin-ext" | Array<"khitan-small-script" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khitan-small-script" | "latin" | "latin-ext" | Array<"khitan-small-script" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Khmer",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "khmer" | "latin" | "latin-ext" | Array<"khmer" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Khojki",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "khojki" | "latin" | "latin-ext" | Array<"khojki" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "khojki" | "latin" | "latin-ext" | Array<"khojki" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Lao",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "lao" | "latin" | "latin-ext" | Array<"lao" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "lao" | "latin" | "latin-ext" | Array<"lao" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Makasar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "makasar" | Array<"latin" | "latin-ext" | "makasar">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "makasar" | Array<"latin" | "latin-ext" | "makasar">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Malayalam",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "malayalam" | Array<"latin" | "latin-ext" | "malayalam">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Myanmar",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "myanmar" | Array<"myanmar">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "myanmar" | Array<"myanmar">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif NP Hmong",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "nyiakeng-puachue-hmong" | Array<"latin" | "nyiakeng-puachue-hmong">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "nyiakeng-puachue-hmong" | Array<"latin" | "nyiakeng-puachue-hmong">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Old Uyghur",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "old-uyghur" | Array<"latin" | "latin-ext" | "old-uyghur">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "old-uyghur" | Array<"latin" | "latin-ext" | "old-uyghur">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Oriya",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "oriya" | Array<"latin" | "latin-ext" | "oriya">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "oriya" | Array<"latin" | "latin-ext" | "oriya">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Ottoman Siyaq",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "ottoman-siyaq-numbers" | Array<"latin" | "latin-ext" | "ottoman-siyaq-numbers">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "ottoman-siyaq-numbers" | Array<"latin" | "latin-ext" | "ottoman-siyaq-numbers">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif SC",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Sinhala",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif TC",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Tamil",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Tangut",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tangut" | Array<"latin" | "latin-ext" | "tangut">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tangut" | Array<"latin" | "latin-ext" | "tangut">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Telugu",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Thai",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | Array<"latin" | "latin-ext" | "thai">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | Array<"latin" | "latin-ext" | "thai">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Tibetan",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "tibetan" | Array<"latin" | "latin-ext" | "tibetan">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "tibetan" | Array<"latin" | "latin-ext" | "tibetan">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Toto",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "toto" | Array<"latin" | "latin-ext" | "toto">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "toto" | Array<"latin" | "latin-ext" | "toto">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Vithkuqi",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vithkuqi" | Array<"latin" | "latin-ext" | "vithkuqi">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vithkuqi" | Array<"latin" | "latin-ext" | "vithkuqi">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Serif Yezidi",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "yezidi" | Array<"latin" | "latin-ext" | "yezidi">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "yezidi" | Array<"latin" | "latin-ext" | "yezidi">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Traditional Nushu",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "nushu" | Array<"latin" | "latin-ext" | "nushu">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "nushu" | Array<"latin" | "latin-ext" | "nushu">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Noto Znamenny Musical Notation",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "znamenny" | Array<"latin" | "latin-ext" | "math" | "symbols" | "znamenny">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "znamenny" | Array<"latin" | "latin-ext" | "math" | "symbols" | "znamenny">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Cut",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Flat",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "greek" | "latin" | "latin-ext" | Array<"greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "greek" | "latin" | "latin-ext" | Array<"greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Oval",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Round",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Slim",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nova Square",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Numans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nunito",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nunito Sans",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "YTLC" | "opsz" | "wdth" | "wght" | Array<"YTLC" | "opsz" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "YTLC" | "opsz" | "wdth" | "wght" | Array<"YTLC" | "opsz" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Nuosu SIL",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "yi" | Array<"latin" | "latin-ext" | "yi">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "yi" | Array<"latin" | "latin-ext" | "yi">;
   })
     | (GoogleFontSharedOptions & {
         font: "Odibee Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Odor Mean Chey",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Offside",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "tamil" | "vietnamese" | Array<"arabic" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "tamil" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "tamil" | "vietnamese" | Array<"arabic" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "tamil" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ojuju",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Old Standard TT",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oldenburg",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ole",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oleo Script",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oleo Script Swash Caps",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Onest",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oooh Baby",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Open Sans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oranienbaum",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Orbit",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Orbitron",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | Array<"latin">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | Array<"latin">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oregano",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Orelega One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Orienta",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Original Surfer",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oswald",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Outfit",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Over the Rainbow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Overlock",
-       
-				weight?: "all" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
-				italic?: "all" | boolean | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Overlock SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Overpass",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Overpass Mono",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ovo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oxanium",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oxygen",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Oxygen Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "PT Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "PT Sans",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "PT Sans Caption",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "PT Sans Narrow",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "PT Serif",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "PT Serif Caption",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pacifico",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Padauk",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "myanmar" | Array<"latin" | "latin-ext" | "myanmar">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "myanmar" | Array<"latin" | "latin-ext" | "myanmar">;
   })
     | (GoogleFontSharedOptions & {
         font: "Padyakke Expanded One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Palanquin",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Palanquin Dark",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Palette Mosaic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pangolin",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Paprika",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Parisienne",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Parkinsans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Passero One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Passion One",
-       
-				weight?: "all" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Passions Conflict",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pathway Extreme",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pathway Gothic One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Patrick Hand",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Patrick Hand SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pattaya",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Patua One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pavanam",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Paytone One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Peddana",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Peralta",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Permanent Marker",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Petemoss",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Petit Formal Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Petrona",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Phetsarath",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "lao" | Array<"lao">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "lao" | Array<"lao">;
   })
     | (GoogleFontSharedOptions & {
         font: "Philosopher",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Phudu",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Piazzolla",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Piedra",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pinyon Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pirata One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pixelify Sans",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Plaster",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Platypi",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Play",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playball",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playfair",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playfair Display",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playfair Display SC",
-       
-				weight?: "all" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
-				italic?: "all" | boolean | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 },
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 },
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playpen Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "emoji" | "latin" | "latin-ext" | "math" | "vietnamese" | Array<"emoji" | "latin" | "latin-ext" | "math" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "emoji" | "latin" | "latin-ext" | "math" | "vietnamese" | Array<"emoji" | "latin" | "latin-ext" | "math" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AR",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AR Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AT",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 },
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 },
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AT Guides",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU NSW",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU NSW Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU QLD",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU QLD Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU SA",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU SA Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU TAS",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU TAS Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU VIC",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite AU VIC Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite BE VLG",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite BE VLG Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite BE WAL",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite BE WAL Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite BR",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite BR Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CA",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CA Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CL",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CL Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CO",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CO Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CU",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CU Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CZ",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite CZ Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE Grund",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE Grund Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE LA",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE LA Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE SAS",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE SAS Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE VA",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DE VA Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DK Loopet",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DK Loopet Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DK Uloopet",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite DK Uloopet Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ES",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ES Deco",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ES Deco Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ES Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite FR Moderne",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite FR Moderne Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite FR Trad",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite FR Trad Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite GB J",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 },
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 },
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite GB J Guides",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite GB S",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 },
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 },
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite GB S Guides",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite HR",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite HR Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite HR Lijeva",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite HR Lijeva Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite HU",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite HU Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ID",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ID Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IE",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IE Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IN",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IN Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IS",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IS Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IT Moderna",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IT Moderna Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IT Trad",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite IT Trad Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite MX",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite MX Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NG Modern",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NG Modern Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NL",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NL Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NO",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NO Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NZ",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite NZ Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite PE",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite PE Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite PL",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite PL Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite PT",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite PT Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite RO",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite RO Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite SK",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite SK Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite TZ",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite TZ Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite US Modern",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite US Modern Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite US Trad",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite US Trad Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite VN",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite VN Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ZA",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | Array<100 | 200 | 300 | 400> | { min: 100 | 200 | 300, max: 200 | 300 | 400 }
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Playwrite ZA Guides",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Plus Jakarta Sans",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Podkova",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poetsen One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poiret One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poller One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poltawski Nowy",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poly",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pompiere",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ponnala",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pontano Sans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poor Story",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Poppins",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Port Lligat Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Port Lligat Slab",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Potta One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pragati Narrow",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Praise",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Prata",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Preahvihear",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Press Start 2P",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Pridi",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Princess Sofia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Prociono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Prompt",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Prosto One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Protest Guerrilla",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Protest Revolution",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Protest Riot",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Protest Strike",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Proza Libre",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Public Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Puppies Play",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Puritan",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Purple Purse",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Qahiri",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Quando",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Quantico",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Quattrocento",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Quattrocento Sans",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Questrial",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Quicksand",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Quintessential",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Qwigley",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Qwitcher Grypen",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "REM",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Racing Sans One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Radio Canada",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "canadian-aboriginal" | "latin" | "latin-ext" | "vietnamese" | Array<"canadian-aboriginal" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "canadian-aboriginal" | "latin" | "latin-ext" | "vietnamese" | Array<"canadian-aboriginal" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Radio Canada Big",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Radley",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rajdhani",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rakkas",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Raleway",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Raleway Dots",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ramabhadra",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ramaraja",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rambla",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rammetto One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rampart One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ranchers",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rancho",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ranga",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rasa",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "vietnamese" | Array<"gujarati" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | "vietnamese" | Array<"gujarati" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rationale",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ravi Prakash",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Readex Pro",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "HEXP" | "wght" | Array<"HEXP" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "HEXP" | "wght" | Array<"HEXP" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Recursive",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "CASL" | "CRSV" | "MONO" | "slnt" | "wght" | Array<"CASL" | "CRSV" | "MONO" | "slnt" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				subsets?: "all" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "CASL" | "CRSV" | "MONO" | "slnt" | "wght" | Array<"CASL" | "CRSV" | "MONO" | "slnt" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Red Hat Display",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Red Hat Mono",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Red Hat Text",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Red Rose",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Redacted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Redacted Script",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reddit Mono",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reddit Sans",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reddit Sans Condensed",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Redressed",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reem Kufi",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reem Kufi Fun",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reem Kufi Ink",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | "vietnamese" | Array<"arabic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reenie Beanie",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Reggae One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rethink Sans",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Revalia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rhodium Libre",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ribeye",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ribeye Marrow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Righteous",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Risque",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Road Rage",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Roboto",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Roboto Condensed",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Roboto Flex",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "GRAD" | "XOPQ" | "XTRA" | "YOPQ" | "YTAS" | "YTDE" | "YTFI" | "YTLC" | "YTUC" | "opsz" | "slnt" | "wdth" | "wght" | Array<"GRAD" | "XOPQ" | "XTRA" | "YOPQ" | "YTAS" | "YTDE" | "YTFI" | "YTLC" | "YTUC" | "opsz" | "slnt" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "GRAD" | "XOPQ" | "XTRA" | "YOPQ" | "YTAS" | "YTDE" | "YTFI" | "YTLC" | "YTUC" | "opsz" | "slnt" | "wdth" | "wght" | Array<"GRAD" | "XOPQ" | "XTRA" | "YOPQ" | "YTAS" | "YTDE" | "YTFI" | "YTLC" | "YTUC" | "opsz" | "slnt" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Roboto Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Roboto Serif",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "GRAD" | "opsz" | "wdth" | "wght" | Array<"GRAD" | "opsz" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "GRAD" | "opsz" | "wdth" | "wght" | Array<"GRAD" | "opsz" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Roboto Slab",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rochester",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rock 3D",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rock Salt",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "RocknRoll One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rokkitt",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Romanesco",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ropa Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rosario",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rosarivo",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rouge Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rowdies",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rozha One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "arabic" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"arabic" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "arabic" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"arabic" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik 80s Fade",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Beastly",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Broken Fax",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Bubbles",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Burned",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Dirt",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Distressed",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Doodle Shadow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Doodle Triangles",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Gemstones",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Glitch",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Glitch Pop",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Iso",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Lines",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Maps",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Marker Hatch",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Maze",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Microbe",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Mono One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Moonrocks",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Pixels",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Puddles",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Scribble",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Spray Paint",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Storm",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Vinyl",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rubik Wet Paint",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ruda",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rufina",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ruge Boogie",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ruluko",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rum Raisin",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ruslan Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "latin" | "latin-ext" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "math" | "symbols" | Array<"cyrillic" | "latin" | "latin-ext" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Russo One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ruthie",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ruwudu",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Rye",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "STIX Two Text",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "SUSE",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sacramento",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sahitya",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sail",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Saira",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Saira Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Saira Extra Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Saira Semi Condensed",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Saira Stencil One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Salsa",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sanchez",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sancreek",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sankofa Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sansita",
-       
-				weight?: "all" | 400 | 700 | 800 | 900 | Array<400 | 700 | 800 | 900> | { min: 400 | 700 | 800, max: 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 700 | 800 | 900 | Array<400 | 700 | 800 | 900> | { min: 400 | 700 | 800, max: 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | 800 | 900 | Array<400 | 700 | 800 | 900> | { min: 400 | 700 | 800, max: 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | 800 | 900 | Array<400 | 700 | 800 | 900> | { min: 400 | 700 | 800, max: 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sansita Swashed",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 300 | 400 | 500 | 600 | 700 | 800, max: 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sarabun",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sarala",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sarina",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sarpanch",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sassy Frass",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Satisfy",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sawarabi Gothic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sawarabi Mincho",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Scada",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Scheherazade New",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Schibsted Grotesk",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Schoolbell",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Scope One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Seaweed Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Secular One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sedan",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sedan SC",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sedgwick Ave",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sedgwick Ave Display",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sen",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Send Flowers",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sevillana",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Seymour One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shadows Into Light",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shadows Into Light Two",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shalimar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shantell Sans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "BNCE" | "INFM" | "SPAC" | "wght" | Array<"BNCE" | "INFM" | "SPAC" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | 800 | Array<300 | 400 | 500 | 600 | 700 | 800> | { min: 300 | 400 | 500 | 600 | 700, max: 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "BNCE" | "INFM" | "SPAC" | "wght" | Array<"BNCE" | "INFM" | "SPAC" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shanti",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Share",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Share Tech",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Share Tech Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shippori Antique",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shippori Antique B1",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shippori Mincho",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shippori Mincho B1",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shizuru",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shojumaru",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Short Stack",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Shrikhand",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "gujarati" | "latin" | "latin-ext" | Array<"gujarati" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Siemreap",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | Array<"khmer">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | Array<"khmer">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sigmar",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sigmar One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Signika",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "GRAD" | "wght" | Array<"GRAD" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "GRAD" | "wght" | Array<"GRAD" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Signika Negative",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Silkscreen",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Simonetta",
-       
-				weight?: "all" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
-				italic?: "all" | boolean | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 900 | Array<400 | 900> | { min: 400, max: 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Single Day",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Sintony",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sirin Stencil",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Six Caps",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sixtyfour",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "BLED" | "SCAN" | Array<"BLED" | "SCAN">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "BLED" | "SCAN" | Array<"BLED" | "SCAN">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sixtyfour Convergence",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">,
-				axes?: "all" | "BLED" | "SCAN" | "XELA" | "YELA" | Array<"BLED" | "SCAN" | "XELA" | "YELA">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | Array<"latin" | "latin-ext" | "math" | "symbols">;
+				axes?: "all" | "BLED" | "SCAN" | "XELA" | "YELA" | Array<"BLED" | "SCAN" | "XELA" | "YELA">;
   })
     | (GoogleFontSharedOptions & {
         font: "Skranji",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Slabo 13px",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Slabo 27px",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Slackey",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Slackside One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Smokum",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Smooch",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Smooch Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Smythe",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sniglet",
-       
-				weight?: "all" | 400 | 800 | Array<400 | 800> | { min: 400, max: 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 800 | Array<400 | 800> | { min: 400, max: 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Snippet",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Snowburst One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sofadi One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sofia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sofia Sans",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sofia Sans Condensed",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sofia Sans Extra Condensed",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sofia Sans Semi Condensed",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Solitreo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Solway",
-       
-				weight?: "all" | 300 | 400 | 500 | 700 | 800 | Array<300 | 400 | 500 | 700 | 800> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 800 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 700 | 800 | Array<300 | 400 | 500 | 700 | 800> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 800 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sometype Mono",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Song Myung",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Sono",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "MONO" | "wght" | Array<"MONO" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "MONO" | "wght" | Array<"MONO" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sonsie One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sora",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sorts Mill Goudy",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sour Gummy",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Source Code Pro",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Source Sans 3",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Source Serif 4",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Space Grotesk",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Space Mono",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Special Elite",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spectral",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spectral SC",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spicy Rice",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spinnaker",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spirax",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Splash",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spline Sans",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Spline Sans Mono",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Squada One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Square Peg",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sree Krushnadevaraya",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sriracha",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Srisakdi",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Staatliches",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stalemate",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stalinist One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stardos Stencil",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stick",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stick No Bills",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 600 | 700, max: 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stint Ultra Condensed",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stint Ultra Expanded",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stoke",
-       
-				weight?: "all" | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Strait",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Style Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Stylish",
-       
-				weight?: "all" | 400 | Array<400>
+				weight?: "allSupportedWeights" | 400 | Array<400>
   })
     | (GoogleFontSharedOptions & {
         font: "Sue Ellen Francisco",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Suez One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | Array<"hebrew" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sulphur Point",
-       
-				weight?: "all" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 700 | Array<300 | 400 | 700> | { min: 300 | 400, max: 400 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sumana",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sunflower",
-       
-				weight?: "all" | 300 | 500 | 700 | Array<300 | 500 | 700> | { min: 300 | 500, max: 500 | 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 300 | 500 | 700 | Array<300 | 500 | 700> | { min: 300 | 500, max: 500 | 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sunshiney",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Supermercado One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Sura",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Suranna",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Suravaram",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Suwannaphum",
-       
-				weight?: "all" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 700 | 900 | Array<100 | 300 | 400 | 700 | 900> | { min: 100 | 300 | 400 | 700, max: 300 | 400 | 700 | 900 }
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Swanky and Moo Moo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Syncopate",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Syne",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "greek" | "latin" | "latin-ext" | Array<"greek" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "greek" | "latin" | "latin-ext" | Array<"greek" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Syne Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Syne Tactile",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tac One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tai Heritage Pro",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "tai-viet" | "vietnamese" | Array<"latin" | "latin-ext" | "tai-viet" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "tai-viet" | "vietnamese" | Array<"latin" | "latin-ext" | "tai-viet" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tajawal",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 700 | 800, max: 300 | 400 | 500 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tangerine",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tapestry",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Taprom",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "khmer" | "latin" | Array<"khmer" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tauri",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Taviraj",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Teachers",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
-				subsets?: "all" | "greek-ext" | "latin" | "latin-ext" | Array<"greek-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
+				subsets?: "all" | "greek-ext" | "latin" | "latin-ext" | Array<"greek-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Teko",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tektur",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Telex",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tenali Ramakrishna",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tenor Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Text Me One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Texturina",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wght" | Array<"opsz" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Thasadith",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "The Girl Next Door",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "The Nautigal",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tienne",
-       
-				weight?: "all" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | 900 | Array<400 | 700 | 900> | { min: 400 | 700, max: 700 | 900 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tillana",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tilt Neon",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "XROT" | "YROT" | Array<"XROT" | "YROT">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "XROT" | "YROT" | Array<"XROT" | "YROT">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tilt Prism",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "XROT" | "YROT" | Array<"XROT" | "YROT">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "XROT" | "YROT" | Array<"XROT" | "YROT">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tilt Warp",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "XROT" | "YROT" | Array<"XROT" | "YROT">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "XROT" | "YROT" | Array<"XROT" | "YROT">;
   })
     | (GoogleFontSharedOptions & {
         font: "Timmana",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "telugu" | Array<"latin" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tinos",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiny5",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Bangla",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "bengali" | "latin" | "latin-ext" | Array<"bengali" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Devanagari Hindi",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Devanagari Marathi",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Devanagari Sanskrit",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Gurmukhi",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "gurmukhi" | "latin" | "latin-ext" | Array<"gurmukhi" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Kannada",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "kannada" | "latin" | "latin-ext" | Array<"kannada" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Tamil",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "tamil" | Array<"latin" | "latin-ext" | "tamil">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tiro Telugu",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "telugu" | Array<"latin" | "latin-ext" | "telugu">;
   })
     | (GoogleFontSharedOptions & {
         font: "Titan One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Titillium Web",
-       
-				weight?: "all" | 200 | 300 | 400 | 600 | 700 | 900 | Array<200 | 300 | 400 | 600 | 700 | 900> | { min: 200 | 300 | 400 | 600 | 700, max: 300 | 400 | 600 | 700 | 900 }
-				italic?: "all" | boolean | 200 | 300 | 400 | 600 | 700 | Array<200 | 300 | 400 | 600 | 700> | { min: 200 | 300 | 400 | 600, max: 300 | 400 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 600 | 700 | 900 | Array<200 | 300 | 400 | 600 | 700 | 900> | { min: 200 | 300 | 400 | 600 | 700, max: 300 | 400 | 600 | 700 | 900 }
+				italic?: "allSupportedWeights" | boolean | 200 | 300 | 400 | 600 | 700 | Array<200 | 300 | 400 | 600 | 700> | { min: 200 | 300 | 400 | 600, max: 300 | 400 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tomorrow",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tourney",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Trade Winds",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Train One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Trirong",
-       
-				weight?: "all" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">,
+				weight?: "allSupportedWeights" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "thai" | "vietnamese" | Array<"latin" | "latin-ext" | "thai" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Trispace",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Trocchi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Trochut",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Truculenta",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "opsz" | "wdth" | "wght" | Array<"opsz" | "wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Trykker",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tsukimi Rounded",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Tulpen One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Turret Road",
-       
-				weight?: "all" | 200 | 300 | 400 | 500 | 700 | 800 | Array<200 | 300 | 400 | 500 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 700, max: 300 | 400 | 500 | 700 | 800 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 500 | 700 | 800 | Array<200 | 300 | 400 | 500 | 700 | 800> | { min: 200 | 300 | 400 | 500 | 700, max: 300 | 400 | 500 | 700 | 800 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Twinkle Star",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ubuntu",
-       
-				weight?: "all" | 300 | 400 | 500 | 700 | Array<300 | 400 | 500 | 700> | { min: 300 | 400 | 500, max: 400 | 500 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 700 | Array<300 | 400 | 500 | 700> | { min: 300 | 400 | 500, max: 400 | 500 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 700 | Array<300 | 400 | 500 | 700> | { min: 300 | 400 | 500, max: 400 | 500 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 700 | Array<300 | 400 | 500 | 700> | { min: 300 | 400 | 500, max: 400 | 500 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ubuntu Condensed",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ubuntu Mono",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ubuntu Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wdth" | "wght" | Array<"wdth" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ubuntu Sans Mono",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | Array<400 | 500 | 600 | 700> | { min: 400 | 500 | 600, max: 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "greek-ext" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Uchen",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "tibetan" | Array<"latin" | "tibetan">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "tibetan" | Array<"latin" | "tibetan">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ultra",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Unbounded",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Uncial Antiqua",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Underdog",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Unica One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "UnifrakturCook",
-       
-				weight?: "all" | 700 | Array<700>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 700 | Array<700>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "UnifrakturMaguntia",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Unkempt",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Unlock",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Unna",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Updock",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Urbanist",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "VT323",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vampiro One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Varela",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Varela Round",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"hebrew" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "hebrew" | "latin" | "latin-ext" | "vietnamese" | Array<"hebrew" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Varta",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vast Shadow",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vazirmatn",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				subsets?: "all" | "arabic" | "latin" | "latin-ext" | Array<"arabic" | "latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vesper Libre",
-       
-				weight?: "all" | 400 | 500 | 700 | 900 | Array<400 | 500 | 700 | 900> | { min: 400 | 500 | 700, max: 500 | 700 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 700 | 900 | Array<400 | 500 | 700 | 900> | { min: 400 | 500 | 700, max: 500 | 700 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Viaoda Libre",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vibes",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vibur",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Victor Mono",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700> | { min: 100 | 200 | 300 | 400 | 500 | 600, max: 200 | 300 | 400 | 500 | 600 | 700 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vidaloka",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Viga",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vina Sans",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Voces",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Volkhov",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				italic?: "all" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				italic?: "allSupportedWeights" | boolean | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 },
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vollkorn",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vollkorn SC",
-       
-				weight?: "all" | 400 | 600 | 700 | 900 | Array<400 | 600 | 700 | 900> | { min: 400 | 600 | 700, max: 600 | 700 | 900 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 600 | 700 | 900 | Array<400 | 600 | 700 | 900> | { min: 400 | 600 | 700, max: 600 | 700 | 900 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Voltaire",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Vujahday Script",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Waiting for the Sunrise",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wallpoet",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Walter Turncoat",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Warnes",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Water Brush",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Waterfall",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wavefont",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				axes?: "all" | "ROND" | "YELA" | "wght" | Array<"ROND" | "YELA" | "wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				axes?: "all" | "ROND" | "YELA" | "wght" | Array<"ROND" | "YELA" | "wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wellfleet",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wendy One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Whisper",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "WindSong",
-       
-				weight?: "all" | 400 | 500 | Array<400 | 500> | { min: 400, max: 500 }
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | 500 | Array<400 | 500> | { min: 400, max: 500 }
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wire One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wittgenstein",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | 900 | Array<400 | 500 | 600 | 700 | 800 | 900> | { min: 400 | 500 | 600 | 700 | 800, max: 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wix Madefor Display",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Wix Madefor Text",
-       
-				weight?: "all" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
-				italic?: "all" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 }
+				italic?: "allSupportedWeights" | boolean | 400 | 500 | 600 | 700 | 800 | Array<400 | 500 | 600 | 700 | 800> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 800 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Work Sans",
-       
-				weight?: "all" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Workbench",
-       
-				weight?: "all" | "variable" | 400 | Array<400>
-				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">,
-				axes?: "all" | "BLED" | "SCAN" | Array<"BLED" | "SCAN">,
+				weight?: "allSupportedWeights" | "variable" | 400 | Array<400>
+				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">;
+				axes?: "all" | "BLED" | "SCAN" | Array<"BLED" | "SCAN">;
   })
     | (GoogleFontSharedOptions & {
         font: "Xanh Mono",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yaldevi",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "latin" | "latin-ext" | "sinhala" | Array<"latin" | "latin-ext" | "sinhala">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yanone Kaffeesatz",
-       
-				weight?: "all" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 200 | 300 | 400 | 500 | 600 | 700 | Array<200 | 300 | 400 | 500 | 600 | 700> | { min: 200 | 300 | 400 | 500 | 600, max: 300 | 400 | 500 | 600 | 700 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yantramanav",
-       
-				weight?: "all" | 100 | 300 | 400 | 500 | 700 | 900 | Array<100 | 300 | 400 | 500 | 700 | 900> | { min: 100 | 300 | 400 | 500 | 700, max: 300 | 400 | 500 | 700 | 900 }
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 100 | 300 | 400 | 500 | 700 | 900 | Array<100 | 300 | 400 | 500 | 700 | 900> | { min: 100 | 300 | 400 | 500 | 700, max: 300 | 400 | 500 | 700 | 900 }
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yarndings 12",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yarndings 12 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yarndings 20",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yarndings 20 Charted",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "math" | "symbols" | Array<"latin" | "math" | "symbols">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yatra One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "devanagari" | "latin" | "latin-ext" | Array<"devanagari" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yellowtail",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yeon Sung",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yeseva One",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yesteryear",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yomogi",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | "vietnamese" | Array<"cyrillic" | "latin" | "latin-ext" | "vietnamese">;
   })
     | (GoogleFontSharedOptions & {
         font: "Young Serif",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yrsa",
-       
-				weight?: "all" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | "vietnamese" | Array<"latin" | "latin-ext" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ysabeau",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ysabeau Infant",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ysabeau Office",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				italic?: "all" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				italic?: "allSupportedWeights" | boolean | 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | Array<1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900> | { min: 1000 | 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800, max: 100 | 1 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 },
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Ysabeau SC",
-       
-				weight?: "all" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
-				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">,
-				axes?: "all" | "wght" | Array<"wght">,
+				weight?: "allSupportedWeights" | "variable" | 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 | Array<1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000> | { min: 1 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900, max: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 1000 }
+				subsets?: "all" | "cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese" | Array<"cyrillic" | "cyrillic-ext" | "greek" | "latin" | "latin-ext" | "math" | "symbols" | "vietnamese">;
+				axes?: "all" | "wght" | Array<"wght">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yuji Boku",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yuji Hentaigana Akari",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yuji Hentaigana Akebono",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yuji Mai",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yuji Syuku",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Yusei Magic",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "ZCOOL KuaiLe",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "ZCOOL QingKe HuangYou",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "ZCOOL XiaoWei",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zain",
-       
-				weight?: "all" | 200 | 300 | 400 | 700 | 800 | 900 | Array<200 | 300 | 400 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 700 | 800, max: 300 | 400 | 700 | 800 | 900 }
-				italic?: "all" | boolean | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 },
-				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">,
+				weight?: "allSupportedWeights" | 200 | 300 | 400 | 700 | 800 | 900 | Array<200 | 300 | 400 | 700 | 800 | 900> | { min: 200 | 300 | 400 | 700 | 800, max: 300 | 400 | 700 | 800 | 900 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | Array<300 | 400> | { min: 300, max: 400 },
+				subsets?: "all" | "arabic" | "latin" | Array<"arabic" | "latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Antique",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Antique Soft",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Dots",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Kaku Gothic Antique",
-       
-				weight?: "all" | 300 | 400 | 500 | 700 | 900 | Array<300 | 400 | 500 | 700 | 900> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 700 | 900 | Array<300 | 400 | 500 | 700 | 900> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Kaku Gothic New",
-       
-				weight?: "all" | 300 | 400 | 500 | 700 | 900 | Array<300 | 400 | 500 | 700 | 900> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 900 }
-				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 700 | 900 | Array<300 | 400 | 500 | 700 | 900> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 900 }
+				subsets?: "all" | "cyrillic" | "latin" | "latin-ext" | Array<"cyrillic" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Kurenaido",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Loop",
-       
-				weight?: "all" | 400 | Array<400>
-				italic?: "all" | boolean | 400 | Array<400>,
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				italic?: "allSupportedWeights" | boolean | 400 | Array<400>,
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Maru Gothic",
-       
-				weight?: "all" | 300 | 400 | 500 | 700 | 900 | Array<300 | 400 | 500 | 700 | 900> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 900 }
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 700 | 900 | Array<300 | 400 | 500 | 700 | 900> | { min: 300 | 400 | 500 | 700, max: 400 | 500 | 700 | 900 }
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Old Mincho",
-       
-				weight?: "all" | 400 | 500 | 600 | 700 | 900 | Array<400 | 500 | 600 | 700 | 900> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 900 }
-				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 500 | 600 | 700 | 900 | Array<400 | 500 | 600 | 700 | 900> | { min: 400 | 500 | 600 | 700, max: 500 | 600 | 700 | 900 }
+				subsets?: "all" | "cyrillic" | "greek" | "latin" | "latin-ext" | Array<"cyrillic" | "greek" | "latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zen Tokyo Zoo",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zeyada",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zhi Mang Xing",
-       
-				weight?: "all" | 400 | Array<400>
-				subsets?: "all" | "latin" | Array<"latin">,
+				weight?: "allSupportedWeights" | 400 | Array<400>
+				subsets?: "all" | "latin" | Array<"latin">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zilla Slab",
-       
-				weight?: "all" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
-				italic?: "all" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 }
+				italic?: "allSupportedWeights" | boolean | 300 | 400 | 500 | 600 | 700 | Array<300 | 400 | 500 | 600 | 700> | { min: 300 | 400 | 500 | 600, max: 400 | 500 | 600 | 700 },
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   })
     | (GoogleFontSharedOptions & {
         font: "Zilla Slab Highlight",
-       
-				weight?: "all" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
-				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">,
+				weight?: "allSupportedWeights" | 400 | 700 | Array<400 | 700> | { min: 400, max: 700 }
+				subsets?: "all" | "latin" | "latin-ext" | Array<"latin" | "latin-ext">;
   }) | "ABeeZee"
 | "ADLaM Display"
 | "AR One Sans"
@@ -13278,6 +11486,5 @@ type GoogleFonts = Array<
 | "Zhi Mang Xing"
 | "Zilla Slab"
 | "Zilla Slab Highlight"
->, 
-
+>; 
 

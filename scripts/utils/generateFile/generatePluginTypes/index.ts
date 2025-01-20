@@ -34,15 +34,13 @@ function pluginConfigType(fontData: FontData) {
 
 export type PluginConfig = {
   settings?: PluginConfigSettings,
-  googleFonts: GoogleFonts},
-}
+  googleFonts: GoogleFonts
+};
 
 export type DisplayOptions = "${DISPLAY_OPTIONS.join(" | ")}";
 
 export type SubsetOptions = "${SUBSETS_OPTIONS.join(" | ")}";
-
 ${generateSettingsType()}
-
 ${generateGoogleFontTypes(fontData)}
 `;
 }
