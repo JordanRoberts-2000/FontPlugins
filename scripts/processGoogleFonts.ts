@@ -1,8 +1,9 @@
-import { prefix } from "../utils/constants.js";
-import fetchFontMetaData from "../utils/fetchFontMetaData.js";
-import generateFontDataJson from "../utils/generateFile/generateFontDataJson.js";
-import generateFontDataMap from "../utils/generateFile/generateFontDataMap.js";
-import generatePluginConfigType from "../utils/generateFile/generatePluginConfigType.js";
+import fetchFontMetaData from "./utils/fetchFontMetaData.js";
+import generateFontDataJson from "./utils/generateFile/generateFontDataJson.js";
+import generateFontDataMap from "./utils/generateFile/generateFontDataMap.js";
+import generatePluginConfigType from "./utils/generateFile/generatePluginTypes/index.js";
+
+export const scriptPrefix = "[Script - GeneratePluginConfigType]";
 
 const googleFontsMetaDataUrl = "https://fonts.google.com/metadata/fonts";
 
@@ -15,5 +16,5 @@ await generateFontDataMap(fontData);
 await generatePluginConfigType(fontData);
 
 console.log(
-  `${prefix} Processed GoogleFont Url, updated font data successfully`
+  `${scriptPrefix} Processed GoogleFont Url, updated font data successfully`
 );
