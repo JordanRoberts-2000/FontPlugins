@@ -8,14 +8,20 @@ import {
 import { scriptPrefix } from "../../../processGoogleFonts.js";
 import generateSettingsType from "./generateSettingsType.js";
 import generateGoogleFontTypes from "./generateGoogleFontTypes.js";
+import { join } from "path";
 
-const generateFile = "packages/viteFontPlugin/src/types/pluginConfigType.ts";
+const generateFile = "pluginConfigType.ts";
 
-export default async function generatePluginTypes(fontData: FontData) {
+export default async function generatePluginTypes(
+  fontData: FontData,
+  folderPaths: string[]
+) {
   const generatedFontConfigType = pluginConfigType(fontData);
 
   try {
-    await fs.writeFile(generateFile, generatedFontConfigType);
+    folderPaths.forEach(async (path) => {
+      await fs.writeFile(join(path, generateFile), generatedFontConfigType);
+    });
   } catch (err) {
     throw new Error(`${scriptPrefix} Error creating '${generateFile}': ${err}`);
   }

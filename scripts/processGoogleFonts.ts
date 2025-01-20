@@ -9,11 +9,17 @@ const googleFontsMetaDataUrl = "https://fonts.google.com/metadata/fonts";
 
 const fontData = await fetchFontMetaData(googleFontsMetaDataUrl);
 
-await generateFontDataJson(fontData);
+await generateFontDataJson(fontData, ["data"]);
 
-await generateFontDataMap(fontData);
+await generateFontDataMap(fontData, [
+  "data",
+  // "packages/viteFontPlugin/src/utils",
+]);
 
-await generatePluginConfigType(fontData);
+await generatePluginConfigType(fontData, [
+  "data",
+  // "packages/viteFontPlugin/src/types",
+]);
 
 console.log(
   `${scriptPrefix} Processed GoogleFont Url, updated font data successfully`
