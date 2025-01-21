@@ -10,13 +10,13 @@ describe("validateGoogleFont", () => {
 
   const schema = validateGoogleFont(z.string(), fontData);
 
-  it("should pass for a valid font-family", () => {
+  it("validates correct google-font families", () => {
     const result = schema.safeParse("Roboto");
     expect(result.success).toBe(true);
     expect(result.data).toBe("Roboto");
   });
 
-  it("should fail for an invalid font-family", () => {
+  it("fails for an invalid font-family", () => {
     const result = schema.safeParse("InvalidFont");
     expect(result.success).toBe(false);
     expect(result.error?.issues[0].message).toBe(
