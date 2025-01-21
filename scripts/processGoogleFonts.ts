@@ -1,13 +1,24 @@
-import fetchFontMetaData from "./utils/fetchFontMetaData.js";
-import generateFontDataJson from "./utils/generateFile/generateFontDataJson.js";
-import generateFontDataMap from "./utils/generateFile/generateFontDataMap.js";
-import generatePluginConfigType from "./utils/generateFile/generatePluginTypes/index.js";
+import attemptFetch from "../shared/utils/attemptFetch.js";
+import parseFontMetaData from "./utils/fontMetaData/fontMetaData.parse.js";
+import generateFontDataJson from "./utils/generateFiles/generateFontDataJson.js";
+import generateFontDataMap from "./utils/generateFiles/generateFontDataMap.js";
+import generateFontStatsJson from "./utils/generateFiles/generateFontStatsJson.js";
+import generatePluginConfigType from "./utils/generateFiles/generatePluginTypes/index.js";
 
 export const scriptPrefix = "[Script - GeneratePluginConfigType]";
 
 const googleFontsMetaDataUrl = "https://fonts.google.com/metadata/fonts";
 
-const fontData = await fetchFontMetaData(googleFontsMetaDataUrl);
+const fontsMetaDataJSON = await attemptFetch({
+  url: googleFontsMetaDataUrl,
+  parse: "JSON",
+  retries: 3,
+  errorPrefix: scriptPrefix,
+});
+
+const fontData = parseFontMetaData(fontsMetaDataJSON);
+
+await generateFontStatsJson(fontData, ["data"]);
 
 await generateFontDataJson(fontData, ["data"]);
 
