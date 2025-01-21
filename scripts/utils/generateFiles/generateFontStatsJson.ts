@@ -4,7 +4,7 @@ import { join } from "path";
 import formatDate from "../formatDate.js";
 import { scriptPrefix } from "../../processGoogleFonts.js";
 
-const generateFile = `googleFontStats_${formatDate(new Date())}.json`;
+const generateFile = `googleFontStats.json`;
 
 export default async function generateFontStatsJson(
   fontData: FontData,
@@ -23,17 +23,27 @@ export default async function generateFontStatsJson(
     new Set(fontData.flatMap((font) => font.axes))
   ).sort();
 
-  const stats = {
-    numberOfGoogleFonts,
-    numberOfVariableFonts,
-    subsets,
-    axes,
+  const genereteJson = {
+    metadata: {
+      generatedOn: formatDate(new Date()),
+      description:
+        "This file contains stats on fontData from 'https://fonts.google.com/metadata/fonts'",
+    },
+    stats: {
+      numberOfGoogleFonts,
+      numberOfVariableFonts,
+      subsets,
+      axes,
+    },
   };
 
   try {
     await Promise.all(
       folderPaths.map((path) => {
-        fs.writeFile(join(path, generateFile), JSON.stringify(stats, null, 2));
+        fs.writeFile(
+          join(path, generateFile),
+          JSON.stringify(genereteJson, null, 2)
+        );
       })
     );
   } catch (error) {
