@@ -1,94 +1,33 @@
 import { z } from "zod";
-import { invalidFallback, removeDuplicates } from "../utils/index.js";
-import {
-  CONFIG_DEFAULT_SETTINGS,
-  DISPLAY_OPTIONS,
-  SUBSETS_OPTIONS,
-} from "../../constants.js";
-import preconnectSchema from "./preconnect.schema.js";
-import scriptSchema from "./script.schema.js";
-import pluginSchema from "./plugin.schema.js";
+import { scriptSettingsSchema } from "./script/script.settings.schema.js";
+import { googleSettingsSchema } from "./google/google.settings.schema.js";
+import { localSettingsSchema } from "./local/local.settings.schema.js";
+import { fontSettingsSchema } from "./shared/fontSettings.schema.js";
+import { cssSettingsSchema } from "./css/css.settings.schema.js";
+import { optimizeSchema } from "./shared/optimize.schema.js";
+import { DeepPartial } from "../../types/index.js";
+import enforceDefaults from "../../lib/zod/applyDefaults.js";
+import defaultSettings from "../../config/defaultSettings.js";
+import ensureDefault from "../../lib/zod/ensureDefault.js";
 
-const settingsSchema = z.object({
-  suppressNotOpenSourceWarnings: invalidFallback(
-    z.boolean().optional(),
-    "suppressNotOpenSourceWarnings",
-    CONFIG_DEFAULT_SETTINGS.suppressNotOpenSourceWarnings
-  ),
-
-  preconnect: invalidFallback(
-    preconnectSchema.optional(),
-    "preconnect",
-    CONFIG_DEFAULT_SETTINGS.preconnect
-  ),
-
-  subsetPriority: invalidFallback(
-    z
-      .array(z.enum(SUBSETS_OPTIONS))
-      .nonempty()
-      .transform((values) =>
-        removeDuplicates(values, "settings.subsetPriority")
-      )
-      .optional(),
-    "subsetPriority",
-    CONFIG_DEFAULT_SETTINGS.subsetPriority
-  ),
-
-  defaultDisplay: invalidFallback(
-    z.enum(DISPLAY_OPTIONS).optional(),
-    "defaultDisplay",
-    CONFIG_DEFAULT_SETTINGS.defaultDisplay
-  ),
-
-  defaultPreload: invalidFallback(
-    z.boolean().optional(),
-    "defaultPreload",
-    CONFIG_DEFAULT_SETTINGS.defaultPreload
-  ),
-
-  convertToWoff2ByDefault: invalidFallback(
-    z.boolean().optional(),
-    "convertToWoff2ByDefault",
-    CONFIG_DEFAULT_SETTINGS.convertToWoff2ByDefault
-  ),
-
-  optimizeByDefault: invalidFallback(
-    z.boolean().optional(),
-    "optimizeByDefault",
-    CONFIG_DEFAULT_SETTINGS.optimizeByDefault
-  ),
-
-  adjustedFallbackByDefault: invalidFallback(
-    z.boolean().optional(),
-    "adjustedFallbackByDefault",
-    CONFIG_DEFAULT_SETTINGS.adjustedFallbackByDefault
-  ),
-
-  includeItalicsByDefault: invalidFallback(
-    z.boolean().optional(),
-    "includeItalicsByDefault",
-    CONFIG_DEFAULT_SETTINGS.includeItalicsByDefault
-  ),
-
-  selfHostByDefault: invalidFallback(
-    z.boolean().optional(),
-    "selfHostByDefault",
-    CONFIG_DEFAULT_SETTINGS.selfHostByDefault
-  ),
-
-  plugin: invalidFallback(
-    pluginSchema.optional(),
-    "plugin",
-    CONFIG_DEFAULT_SETTINGS.plugin
-  ),
-
-  script: invalidFallback(
-    scriptSchema.optional(),
-    "script",
-    CONFIG_DEFAULT_SETTINGS.script
-  ),
+const settingsSchemaBase = fontSettingsSchema.extend({
+  unicodeRange: z.string(),
+  preconnects: z.array(z.string()),
+  optimize: optimizeSchema,
+  google: googleSettingsSchema,
+  local: localSettingsSchema,
+  css: cssSettingsSchema,
+  script: scriptSettingsSchema,
 });
 
-export type Settings = z.infer<typeof settingsSchema>;
+const settingsSchemaBaseWithDefaults = enforceDefaults(
+  settingsSchemaBase,
+  defaultSettings
+);
 
-export default settingsSchema;
+export const settingsSchema = ensureDefault(
+  settingsSchemaBaseWithDefaults.optional(),
+  defaultSettings as any
+);
+
+export type GlobalSettings = DeepPartial<z.infer<typeof settingsSchemaBase>>;
