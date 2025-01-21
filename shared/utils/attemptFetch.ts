@@ -19,6 +19,25 @@ type AttemptFetchReturnType<T extends AttemptFetchOptions> =
     : T["parse"] extends "formData"
     ? FormData
     : Response;
+/**
+ * @description A utility function for fetching data with retries and optional response parsing.
+ * @throws Will throw an error if the fetch fails after all retries or if parsing fails.
+ * 
+ * @property {string} url - The URL to fetch.
+ * @property {RequestInit} [options] - Fetch options, such as headers and method. Defaults to `{ method: "GET" }`.
+ * @property {"JSON" | "text" | "blob" | "arrayBuffer" | "formData"} [parse] - The desired response parsing format.
+ * @property {number} [retries=3] - Number of retry attempts in case of failure.
+ * @property {number} [delay=1000] - Delay in milliseconds between retries.
+ * @property {string} [errorPrefix] - Optional prefix for error messages.
+
+ * @example
+ * const data = await attemptFetch({
+ *   url: "https://api.example.com/data",
+ *   parse: "JSON",
+ *   retries: 5,
+ *   delay: 2000,
+ * });
+ */
 
 export default async function attemptFetch<T extends AttemptFetchOptions>({
   url,

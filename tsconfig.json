@@ -9,6 +9,6 @@
     "sourceMap": true,
     "verbatimModuleSyntax": true
   },
-  "include": ["scripts", "utils", "tests"],
+  "include": ["scripts", "shared/utils", "tests"],
   "exclude": ["node_modules"]
 }

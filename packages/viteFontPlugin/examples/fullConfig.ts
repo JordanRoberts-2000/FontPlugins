@@ -1,38 +1,75 @@
 export const fontConfig = {
   settings: {
-    suppressNotOpenSourceWarnings: true,
-    preconnect: {
-      google: true,
-      custom: ["cdnPreConnectOne", "cdnPreConnectTwo"],
-    },
-    subsetPriority: ["latin", "latin-ext", "cyrillic"],
-    defaultPreload: true,
-    defaultDisplay: "auto",
-    convertToWoff2ByDefault: true,
-    optimizeByDefault: true,
-    adjustedFallbackByDefault: true,
+    disable: false,
+    preload: true,
+    display: "auto",
+    subset: "latin",
     includeItalicsByDefault: true,
-    selfHostByDefault: true,
-    plugin: {
+    unicodeRange: "",
+
+    preconnects: ["cdnPreConnectOne", "cdnPreConnectTwo"],
+
+    optimize: {
+      enabled: true,
+      extractUnicodeRange: true,
+      trimUnusedWeightsAndStyles: true,
+      convertToWoff2: true,
+    },
+
+    google: {
       disable: false,
-      css: {
-        method: "externalBuildFiles",
-        minify: true,
+      preconnect: true,
+      suppressNotOpenSourceWarnings: true,
+      adjustedFallback: true,
+      includeItalicsByDefault: true,
+      preload: true,
+      subset: "latin",
+      display: "auto",
+      fallbackSubsets: ["latin", "latin-ext", "cyrillic"],
+      selfHost: {
+        enabled: true,
+        extractUnicodeRange: true,
+        trimUnusedWeightsAndStyles: true,
       },
-      fontFiles: {
-        optimise: true,
+    },
+
+    local: {
+      disable: false,
+      subset: "latin",
+      unicodeRange: "",
+      preload: true,
+      display: "auto",
+      selfHostRemoteUrlsOnBuild: true,
+      optimize: {
+        enabled: true,
+        extractUnicodeRange: true,
+        trimUnusedWeightsAndStyles: true,
         convertToWoff2: true,
       },
     },
+
+    css: {
+      method: "externalBuildFiles",
+      minify: true,
+    },
+
     script: {
+      outputFolder: "./src/assets/fonts",
       css: {
         disable: false,
         minify: false,
-        outputPath: "./src/styles",
+        fileName: "",
+        outputFolder: "./src/styles",
       },
       fontFiles: {
         disable: false,
-        outputPath: "./src/assets/fonts",
+        outputFolder: "./src/assets/fonts",
+        optimize: {
+          enabled: true,
+          extractUnicodeRange: true,
+          trimUnusedWeightsAndStyles: true,
+          convertToWoff2: true,
+        },
       },
     },
   },
@@ -44,8 +81,6 @@ export const fontConfig = {
       includeAdjustedFallback: false,
       fallback: "customFallback",
       display: "swap",
-      selfHost: true,
-      optimize: true,
       weights: ["allSupportedWieghts", "variable"],
       includeItalics: "allSupportedItalics",
       subsets: "allSubsets",
@@ -62,65 +97,6 @@ export const fontConfig = {
       },
     },
   ],
-  cdnFonts: {
-    // semantic
-    // Wont attempt to self host
-    name: "Open Sans",
-    className: "classname",
-    cssVariable: "--serif",
-    fallback: "customFallback",
-    display: "swap",
-    includeAdjustedFallback: "Google Font", // or false
-    unicodeRange: "",
-    preload: true,
-    defer: false,
-    urls: [
-      {
-        fontUrl: "",
-        weight: 400,
-        preload: true,
-        defer: false,
-        italic: true,
-        unicodeRange: "",
-        display: "swap",
-        axes: {
-          wght: [400, 700],
-          ital: [0, 1],
-        },
-      },
-    ],
-  },
-  remoteFonts: {
-    name: "Open Sans",
-    className: "classname",
-    selfHost: true,
-    cssVariable: "--serif",
-    fallback: "customFallback",
-    display: "swap",
-    preload: true,
-    convertToWoff2: true,
-    optimize: true,
-    defer: false,
-    unicodeRange: "",
-    urls: [
-      {
-        fontUrl: "",
-        weight: 400,
-        italic: true,
-        preload: true,
-        convertToWoff2: true,
-        optimize: true,
-        defer: false,
-        unicodeRange: "",
-        selfHost: false,
-        display: "swap",
-        axes: {
-          wght: [400, 700],
-          ital: [0, 1],
-        },
-      },
-    ],
-  },
   localFonts: {
     name: "Open Sans",
     className: "classname",
@@ -128,23 +104,27 @@ export const fontConfig = {
     fallback: "customFallback",
     display: "swap",
     preload: true,
-    convertToWoff2: true,
-    optimize: true,
+
+    optimize: {
+      enabled: true,
+      extractUnicodeRange: true,
+      trimUnusedWeightsAndStyles: true,
+      convertToWoff2: true,
+    },
+
     defer: false,
     unicodeRange: "",
-    paths: [
+    src: [
       {
-        path: "",
+        src: "",
         weight: 400,
         italic: true,
         preload: true,
-        convertToWoff2: true,
-        optimize: true,
         defer: false,
-        unicodeRange: "",
         display: "swap",
         axes: {
-          wght: [400, 700],
+          wght: [100, 900],
+          wdth: [75, 125],
           ital: [0, 1],
         },
       },

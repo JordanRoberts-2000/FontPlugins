@@ -4,7 +4,7 @@ import { googleSettingsSchema } from "./google/google.settings.schema.js";
 import { localSettingsSchema } from "./local/local.settings.schema.js";
 import { fontSettingsSchema } from "./shared/fontSettings.schema.js";
 import { cssSettingsSchema } from "./css/css.settings.schema.js";
-import { optimizeSchema } from "./shared/optimize.schema.js";
+import { optimizeSchema } from "../shared/optimize.schema.js";
 import { DeepPartial } from "../../types/index.js";
 import enforceDefaults from "../../lib/zod/applyDefaults.js";
 import defaultSettings from "../../config/defaultSettings.js";

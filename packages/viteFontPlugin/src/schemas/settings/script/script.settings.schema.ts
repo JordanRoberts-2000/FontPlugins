@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { optimizeSchema } from "../shared/optimize.schema.js";
+import { optimizeSchema } from "../../shared/optimize.schema.js";
 
 export const scriptSettingsSchema = z.object({
   outputFolder: z.string(),

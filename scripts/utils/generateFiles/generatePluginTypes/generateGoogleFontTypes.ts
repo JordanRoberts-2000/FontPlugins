@@ -1,3 +1,4 @@
+import { WEIGHT_MAP } from "../../../../shared/constants.js";
 import type { FontData } from "../../fontMetaData/fontMetaData.schema.js";
 
 export default function generateFontTypes(fontData: FontData) {
@@ -35,11 +36,19 @@ function generateWeights(roman: number[], axes: string[]) {
     return `${axes.length > 0 ? '\n\t\t\t\tweight?: "variable,"' : ""}`;
   }
 
+  const weightOptions = roman
+    .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+    .join(" | ");
+
   return `\n\t\t\t\tweight?: "allSupportedWeights"${
     axes.length > 0 ? ' | "variable"' : ""
-  } | ${roman.join(" | ")} | Array<${roman.join(" | ")}>${
+  } | ${weightOptions} | Array<${weightOptions}>${
     roman.length > 1
-      ? ` | { min: ${roman.slice(0, -1).join(" | ")}, max: ${roman
+      ? ` | { min: ${roman
+          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+          .slice(0, -1)
+          .join(" | ")}, max: ${roman
+          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
           .slice(1)
           .join(" | ")} }`
       : ""
@@ -51,11 +60,17 @@ function generateItalics(italics: number[]) {
     return ``;
   }
 
-  return `\n\t\t\t\titalic?: "allSupportedWeights" | boolean | ${italics.join(
-    " | "
-  )} | Array<${italics.join(" | ")}>${
+  const italicOptions = italics
+    .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+    .join(" | ");
+
+  return `\n\t\t\t\titalic?: "allSupportedWeights" | boolean | ${italicOptions} | Array<${italicOptions}>${
     italics.length > 1
-      ? ` | { min: ${italics.slice(0, -1).join(" | ")}, max: ${italics
+      ? ` | { min: ${italics
+          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+          .slice(0, -1)
+          .join(" | ")}, max: ${italics
+          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
           .slice(1)
           .join(" | ")} }`
       : ""

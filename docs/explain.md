@@ -1,0 +1,10 @@
+{ name: "Latin", description: "Covers English and most Western European languages." },
+{ name: "Latin-Ext", description: "Adds support for Eastern European, Baltic, and some additional characters." },
+{ name: "Cyrillic", description: "Used by Russian, Ukrainian, Bulgarian, and other Slavic languages." },
+{ name: "Greek", description: "Covers Greek scripts, including modern Greek." },
+{ name: "Greek-Ext", description: "Adds extended Greek characters for historical or specialized texts." },
+{ name: "Vietnamese", description: "Supports Vietnamese characters with unique diacritics." },
+{ name: "Cyrillic-Ext", description: "Extends Cyrillic support for additional Slavic and Asian languages." },
+{ name: "Hebrew", description: "Covers modern Hebrew script." },
+{ name: "Arabic", description: "Includes Arabic and related scripts." },
+{ name: "Devanagari", description: "Used for Hindi, Marathi, and other Indian languages." }

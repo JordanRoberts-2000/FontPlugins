@@ -80,6 +80,33 @@ describe("Weight Schemas", () => {
         expect(result.success).toBe(false);
       });
     });
+
+    it("should check min < max when object provided, converting string weights if needed", () => {
+      const validObjectWeights = [
+        { min: 300, max: 800 },
+        { min: 300, max: "Bold" },
+        { min: "Extra Light", max: 300 },
+        { min: "Extra Light", max: "Bold" },
+      ];
+
+      const invalidObjectWeights = [
+        { max: 300, min: 800 },
+        { max: 300, min: "Bold" },
+        { max: "Extra Light", min: 300 },
+        { max: "Extra Light", min: "Bold" },
+      ];
+
+      validObjectWeights.forEach((objectWeight) => {
+        const result = baseWeightSchema.safeParse(objectWeight);
+        expect(result.success).toBe(true);
+        expect(result.data).toEqual(objectWeight);
+      });
+
+      invalidObjectWeights.forEach((objectWeight) => {
+        const result = baseWeightSchema.safeParse(objectWeight);
+        expect(result.success).toBe(false);
+      });
+    });
   });
 
   describe("googleLoadOptionsWeightSchema", () => {

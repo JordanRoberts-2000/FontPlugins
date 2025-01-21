@@ -17,3 +17,11 @@
   font-style: normal;
   font-display: swap;
 }
+
+.customClass {
+  font-family: "Open Sans", "Times New Roman", Times, serif;
+}
+
+:root {
+  --serif: "Open Sans", "Times New Roman", Times, serif;
+}

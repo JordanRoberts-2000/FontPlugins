@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { fontSettingsSchema } from "../shared/fontSettings.schema.js";
 import { SUBSETS_OPTIONS } from "../../../../../../shared/constants.js";
-import { optimizeSchema } from "../shared/optimize.schema.js";
+import { optimizeSchema } from "../../shared/optimize.schema.js";
 import removeDuplicates from "../../../lib/zod/removeDuplicates.js";
 
 export const googleSettingsSchema = fontSettingsSchema

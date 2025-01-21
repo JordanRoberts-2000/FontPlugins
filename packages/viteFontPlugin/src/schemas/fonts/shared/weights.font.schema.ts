@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { WEIGHT_MAP } from "../../../../../../shared/constants.js";
 
 export const weightSchema = z.union([
   z.literal(100),
@@ -30,9 +31,33 @@ export const baseWeightSchema = z.union([
       min: weightSchema,
       max: weightSchema,
     })
-    .refine(({ min, max }) => min < max, {
-      message: "Invalid weight: max !> min",
-    }),
+    .refine(
+      ({ min, max }) => {
+        const minValue =
+          typeof min === "number"
+            ? min
+            : parseInt(
+                Object.keys(WEIGHT_MAP).find(
+                  (key) => WEIGHT_MAP[+key] === min
+                ) ?? "0",
+                10
+              );
+        const maxValue =
+          typeof max === "number"
+            ? max
+            : parseInt(
+                Object.keys(WEIGHT_MAP).find(
+                  (key) => WEIGHT_MAP[+key] === max
+                ) ?? "0",
+                10 // Use max instead of min
+              );
+
+        return minValue < maxValue;
+      },
+      {
+        message: "Invalid weight: max must be greater than min",
+      }
+    ),
 ]);
 
 export const googleLoadOptionsWeightSchema = z
