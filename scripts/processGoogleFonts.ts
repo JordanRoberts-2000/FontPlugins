@@ -1,9 +1,9 @@
 import attemptFetch from "../shared/utils/attemptFetch.js";
 import parseFontMetaData from "./utils/fontMetaData/fontMetaData.parse.js";
-import generateFontDataJson from "./utils/generateFiles/generateFontDataJson.js";
-import generateFontDataMap from "./utils/generateFiles/generateFontDataMap.js";
-import generateFontStatsJson from "./utils/generateFiles/generateFontStatsJson.js";
-import generatePluginConfigType from "./utils/generateFiles/generatePluginTypes/index.js";
+import generateFontDataJson from "./utils/generateFiles/fontJson/jsonFontData.generate.js";
+import generateFontDataMap from "./utils/generateFiles/fontMap/fontDataMap.generate.js";
+import generateFontStatsJson from "./utils/generateFiles/fontJson/jsonFontStats.generate.js";
+import generatePluginConfigType from "./utils/generateFiles/fontTypes/pluginType.generate.js";
 
 export const scriptPrefix = "[Script - GeneratePluginConfigType]";
 

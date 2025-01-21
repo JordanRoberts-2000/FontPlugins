@@ -1,8 +1,8 @@
-import type { FontData } from "../fontMetaData/fontMetaData.schema.js";
+import type { FontData } from "../../fontMetaData/fontMetaData.schema.js";
 import fs from "fs/promises";
 import { join } from "path";
-import formatDate from "../formatDate.js";
-import { scriptPrefix } from "../../processGoogleFonts.js";
+import formatDate from "../../formatDate.js";
+import { scriptPrefix } from "../../../processGoogleFonts.js";
 
 const generateFile = "googleFontDataMap.ts";
 
@@ -36,9 +36,9 @@ ${fontData
 
   try {
     await Promise.all(
-      folderPaths.map((path) => {
-        fs.writeFile(join(path, generateFile), fontDataMap);
-      })
+      folderPaths.map((path) =>
+        fs.writeFile(join(path, generateFile), fontDataMap)
+      )
     );
   } catch (error) {
     throw new Error(

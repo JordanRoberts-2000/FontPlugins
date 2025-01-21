@@ -1,8 +1,8 @@
 import fs from "fs/promises";
 import { join } from "path";
-import type { FontData } from "../fontMetaData/fontMetaData.schema.js";
-import formatDate from "../formatDate.js";
-import { scriptPrefix } from "../../processGoogleFonts.js";
+import type { FontData } from "../../fontMetaData/fontMetaData.schema.js";
+import formatDate from "../../formatDate.js";
+import { scriptPrefix } from "../../../processGoogleFonts.js";
 
 const generateFile = `googleFontData.json`;
 
@@ -21,12 +21,12 @@ export default async function generateFontDataJson(
     };
 
     await Promise.all(
-      folderPaths.map((path) => {
+      folderPaths.map((path) =>
         fs.writeFile(
           join(path, generateFile),
           JSON.stringify(fontMetaDataJson, null, 2)
-        );
-      })
+        )
+      )
     );
   } catch (error) {
     throw new Error(

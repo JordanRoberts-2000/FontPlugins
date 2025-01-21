@@ -6,8 +6,8 @@ import {
   SUBSETS_OPTIONS,
 } from "../../../../shared/constants.js";
 import { scriptPrefix } from "../../../processGoogleFonts.js";
-import generateSettingsType from "./generateSettingsType.js";
-import generateGoogleFontTypes from "./generateGoogleFontTypes.js";
+import generateSettingsType from "./settingsType.generate.js";
+import generateGoogleFontTypes from "./googleFontTypes.generate.js";
 import { join } from "path";
 
 const generateFile = "pluginConfigType.ts";
@@ -20,9 +20,9 @@ export default async function generatePluginTypes(
 
   try {
     await Promise.all(
-      folderPaths.map((path) => {
-        fs.writeFile(join(path, generateFile), generatedFontConfigType);
-      })
+      folderPaths.map((path) =>
+        fs.writeFile(join(path, generateFile), generatedFontConfigType)
+      )
     );
   } catch (err) {
     throw new Error(`${scriptPrefix} Error creating '${generateFile}': ${err}`);
