@@ -1,10 +1,12 @@
-import { SUBSET_FALLBACK_ARRAY } from "../constants.js";
+import { SUBSET_FALLBACK_ARRAY } from "../constants/index.js";
+import { CSS_METHODS } from "../../../../shared/constants.js";
+import { GlobalSettings } from "../schemas/settings/settings.schema.js";
 
-const defaultSettings = {
+const defaultSettings: GlobalSettings = {
   disable: false,
   preload: false,
   display: "swap" as const,
-  subset: "latin",
+  subset: "latin" as const,
   includeItalicsByDefault: true,
   unicodeRange: undefined,
   preconnects: undefined,
@@ -17,39 +19,43 @@ const defaultSettings = {
   },
 
   google: {
-    disable: false,
+    disable: undefined,
+    preload: undefined,
+    subset: undefined,
+    display: undefined,
+    includeItalicsByDefault: undefined,
+
     preconnect: true,
     suppressNotOpenSourceWarnings: true,
     adjustedFallback: true,
-    includeItalicsByDefault: true,
-    subset: "latin" as const,
-    preload: false,
-    display: "swap" as const,
     fallbackSubsets: SUBSET_FALLBACK_ARRAY,
+
     selfHost: {
-      enabled: true,
-      extractUnicodeRange: true,
-      trimUnusedWeightsAndStyles: true,
+      enabled: undefined,
+      extractUnicodeRange: undefined,
+      trimUnusedWeightsAndStyles: undefined,
     },
   },
 
   local: {
-    disable: false,
-    subset: "latin" as const,
+    disable: undefined,
+    subset: undefined,
+    preload: undefined,
+    display: undefined,
+
     unicodeRange: undefined,
-    preload: false,
-    display: "swap" as const,
     selfHostRemoteUrlsOnBuild: true,
+
     optimize: {
-      enabled: true,
-      extractUnicodeRange: true,
-      trimUnusedWeightsAndStyles: true,
-      convertToWoff2: true,
+      enabled: undefined,
+      extractUnicodeRange: undefined,
+      trimUnusedWeightsAndStyles: undefined,
+      convertToWoff2: undefined,
     },
   },
 
   css: {
-    method: "inlineHead",
+    method: "inlineHead" as (typeof CSS_METHODS)[number],
     minify: true,
   },
 
