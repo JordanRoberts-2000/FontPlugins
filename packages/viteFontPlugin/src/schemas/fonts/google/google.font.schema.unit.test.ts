@@ -1,7 +1,18 @@
 import { describe, it, expect } from "vitest";
 import { googleFontSchema } from "./google.font.schema.js";
+import Logger from "../../../utils/logger.js";
+
+vi.mock("../../../utils/logger.js", () => ({
+  default: {
+    error: vi.fn(),
+  },
+}));
 
 describe("googleFontSchema", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   const validFont = "Roboto";
   const validInput = {
     font: "Inter",
@@ -42,16 +53,15 @@ describe("googleFontSchema", () => {
     expect(result.data).toEqual(validInput);
   });
 
-  it("should reject invalid font not in fontData", () => {
+  it("logs an error and returns null if font is invalid", () => {
     const result = googleFontSchema.safeParse({
       ...validInput,
       font: "InvalidFont",
     });
 
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].message).toBe(
-      "Invalid font-family: InvalidFont"
-    );
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should reject invalid subsets", () => {
@@ -60,8 +70,9 @@ describe("googleFontSchema", () => {
       subsets: ["invalidSubset"],
     });
 
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].message).toContain("Invalid input");
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should reject invalid axes", () => {
@@ -70,8 +81,9 @@ describe("googleFontSchema", () => {
       axes: ["invalidAxis"],
     });
 
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].message).toContain("Invalid input");
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should reject invalid preload options", () => {
@@ -80,8 +92,9 @@ describe("googleFontSchema", () => {
       preload: { regular: "invalidWeight" },
     });
 
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].message).toContain("Invalid input");
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should allow optional fields to be omitted", () => {
@@ -95,7 +108,8 @@ describe("googleFontSchema", () => {
   it("should reject completely invalid input", () => {
     const result = googleFontSchema.safeParse({ invalidField: "value" });
 
-    expect(result.success).toBe(false);
-    expect(result.error?.issues.length).toBeGreaterThan(0);
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 });

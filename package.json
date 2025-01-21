@@ -7,7 +7,7 @@
   "scripts": {
     "update": "cd packages/viteFontPlugin && npm run build && yalc publish && cd ../../playground/react && yalc add @strawr/vite-font-plugin",
     "updateFonts": "tsx scripts/processGoogleFonts.ts",
-    "tests": "vitest"
+    "test": "vitest"
   },
   "author": "",
   "license": "ISC",

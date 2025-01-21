@@ -1,7 +1,18 @@
 import { describe, it, expect } from "vitest";
 import { localFontSchema } from "./local.font.schema.js";
+import Logger from "../../../utils/logger.js";
+
+vi.mock("../../../utils/logger.js", () => ({
+  default: {
+    error: vi.fn(),
+  },
+}));
 
 describe("localFontSchema", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should pass with valid input", () => {
     const input = {
       name: "Open Sans",
@@ -34,6 +45,18 @@ describe("localFontSchema", () => {
     expect(data).toEqual(input);
   });
 
+  it("logs an error and returns null if invalid", () => {
+    const input = {
+      preload: true,
+    };
+
+    const result = localFontSchema.safeParse(input);
+
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
+  });
+
   it("should fail if name is missing", () => {
     const input = {
       preload: true,
@@ -48,9 +71,10 @@ describe("localFontSchema", () => {
     };
 
     const result = localFontSchema.safeParse(input);
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].path).toEqual(["name"]);
-    expect(result.error?.issues[0].message).toBe("Required");
+
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should fail if src is missing or empty", () => {
@@ -62,9 +86,10 @@ describe("localFontSchema", () => {
     };
 
     const result = localFontSchema.safeParse(input);
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].path).toEqual(["src"]);
-    expect(result.error?.issues[0].message).toBe("Required");
+
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should fail if optimize does not match the schema", () => {
@@ -86,7 +111,10 @@ describe("localFontSchema", () => {
     };
 
     const result = localFontSchema.safeParse(input);
-    expect(result.success).toBe(false);
+
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should fail if unicodeRange is empty", () => {
@@ -104,8 +132,10 @@ describe("localFontSchema", () => {
     };
 
     const result = localFontSchema.safeParse(input);
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].path).toEqual(["unicodeRange"]);
+
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 
   it("should fail if src elements are invalid", () => {
@@ -120,7 +150,9 @@ describe("localFontSchema", () => {
     };
 
     const result = localFontSchema.safeParse(input);
-    expect(result.success).toBe(false);
-    expect(result.error?.issues[0].path).toEqual(["src", 0, "weight"]);
+
+    expect(result.success).toBe(true);
+    expect(result.data).toBe(null);
+    expect(Logger.error).toHaveBeenCalled();
   });
 });
