@@ -1,96 +1,105 @@
-import settingsSchema from "./settings.schema.js";
-import { CONFIG_DEFAULT_SETTINGS } from "../../constants.js";
+import defaultSettings from "../../config/defaultSettings.js";
+import Logger from "../../utils/logger.js";
+import { settingsSchema, GlobalSettings } from "./settings.schema.js";
+
+vi.mock("../../utils/logger.js", () => ({
+  default: {
+    warn: vi.fn(),
+    error: vi.fn(),
+  },
+}));
 
 describe("settingsSchema", () => {
-  it("validates a fully populated valid configuration", () => {
-    const validConfig = {
-      suppressNotOpenSourceWarnings: true,
-      preconnect: {
-        google: true,
-        custom: ["cdn.example.com"],
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("validates correct input", () => {
+    const { data, success } = settingsSchema.safeParse(defaultSettings);
+
+    expect(success).toBe(true);
+    expect(data).toEqual(defaultSettings);
+  });
+
+  it("provides fallbacks for optional fields", () => {
+    const input: GlobalSettings = {
+      display: "block",
+      preload: true,
+      google: {
+        disable: true,
       },
-      subsetPriority: ["latin", "latin-ext"],
-      defaultDisplay: "swap",
-      defaultPreload: true,
-      convertToWoff2ByDefault: true,
-      optimizeByDefault: true,
-      adjustedFallbackByDefault: false,
-      includeItalicsByDefault: false,
-      selfHostByDefault: true,
-      plugin: {
-        disable: false,
-        css: {
-          method: "inlineHead",
-          minify: true,
-        },
-        fontFiles: {
-          optimise: true,
-          convertToWoff2: true,
-        },
-      },
-      script: {
-        css: {
-          disable: false,
-          minify: false,
-          outputPath: "./styles",
-        },
-        fontFiles: {
-          disable: false,
-          outputPath: "./fonts",
+      local: {
+        optimize: {
+          enabled: false,
         },
       },
     };
 
-    const result = settingsSchema.safeParse(validConfig);
+    const { data, success } = settingsSchema.safeParse(input);
 
-    expect(result.success).toBe(true);
-    expect(result.data).toEqual(validConfig);
+    expect(success).toBe(true);
+
+    expect(data?.display).toBe("block");
+    expect(data?.local.optimize.enabled).toBe(false);
+
+    expect(data?.subset).toBe(defaultSettings.subset);
+    expect(data?.css.method).toBe(defaultSettings.css?.method);
   });
 
-  it("applies defaults for missing optional fields", () => {
-    const partialConfig = {
-      subsetPriority: ["latin"],
+  it("removes any duplicates from settings.google.fallbackSubsets", () => {
+    const input: GlobalSettings = {
+      display: "block",
+      preload: true,
+      google: {
+        disable: true,
+        fallbackSubsets: ["latin", "latin", "latin-ext"],
+      },
+      local: {
+        optimize: {
+          enabled: false,
+        },
+      },
     };
 
-    const result = settingsSchema.safeParse(partialConfig);
+    const { data, success } = settingsSchema.safeParse(input);
 
-    expect(result.success).toBe(true);
-    expect(result.data).toEqual({
-      ...CONFIG_DEFAULT_SETTINGS,
-      subsetPriority: ["latin"],
-    });
+    expect(success).toBe(true);
+    expect(data?.google.fallbackSubsets).toEqual(["latin", "latin-ext"]);
+    expect(Logger.warn).toBeCalled();
   });
 
-  it("fallbacks to defaults for invalid fields", () => {
-    const invalidConfig = {
-      suppressNotOpenSourceWarnings: "not-a-boolean",
-      subsetPriority: ["invalid-subset"],
-      defaultDisplay: "invalid",
+  it("fallbacks to defaults and logs an error if any invalid field is given", () => {
+    const input = {
+      display: "block",
+      preload: 53,
+      google: {
+        disable: true,
+        fallbackSubsets: ["latin", "latin", "latin-ext"],
+      },
+      local: {
+        optimize: {
+          enabled: false,
+        },
+      },
     };
 
-    const result = settingsSchema.safeParse(invalidConfig);
+    const { data, success } = settingsSchema.safeParse(input);
 
-    expect(result.success).toBe(true);
-    expect(result.data).toEqual(CONFIG_DEFAULT_SETTINGS);
+    expect(success).toBe(true);
+    expect(data?.preload).toEqual(defaultSettings.preload);
+    expect(Logger.error).toBeCalled();
   });
 
-  it("removes any duplicates from subsetPriority array", () => {
-    const configWithDuplicates = {
-      subsetPriority: ["latin", "latin", "latin-ext", "latin-ext"],
-    };
-
-    const result = settingsSchema.safeParse(configWithDuplicates);
-
-    expect(result.success).toBe(true);
-    expect(result.data?.subsetPriority).toEqual(["latin", "latin-ext"]);
+  it("fallbacks to default settings if settings is not provided", () => {
+    const { data, success } = settingsSchema.safeParse(undefined);
+    expect(success).toBe(true);
+    expect(data).toEqual(defaultSettings);
   });
 
-  it("handles entirely missing configuration with defaults", () => {
-    const minimalConfig = {};
-
-    const result = settingsSchema.safeParse(minimalConfig);
-
-    expect(result.success).toBe(true);
-    expect(result.data).toEqual(CONFIG_DEFAULT_SETTINGS);
+  it("fallbacks to default settings if settings is invalid", () => {
+    const { data, success } = settingsSchema.safeParse(43);
+    expect(success).toBe(true);
+    expect(data).toEqual(defaultSettings);
+    expect(Logger.error).toHaveBeenCalled();
   });
 });
