@@ -1,9 +1,31 @@
 {
   "metadata": {
-    "generatedOn": "21-01-25",
+    "generatedOn": "29-01-25",
     "description": "This file contains modified json fontData from 'https://fonts.google.com/metadata/fonts'"
   },
   "fonts": [
+    {
+      "family": "42dot Sans",
+      "weights": {
+        "roman": [
+          300,
+          400,
+          500,
+          600,
+          700,
+          800
+        ],
+        "italic": []
+      },
+      "subsets": [
+        "menu",
+        "korean",
+        "latin"
+      ],
+      "axes": [
+        "wght"
+      ]
+    },
     {
       "family": "ABeeZee",
       "weights": {
@@ -11973,10 +11995,18 @@
       "family": "Inclusive Sans",
       "weights": {
         "roman": [
-          400
+          300,
+          400,
+          500,
+          600,
+          700
         ],
         "italic": [
-          400
+          300,
+          400,
+          500,
+          600,
+          700
         ]
       },
       "subsets": [
@@ -11985,7 +12015,9 @@
         "latin-ext",
         "vietnamese"
       ],
-      "axes": []
+      "axes": [
+        "wght"
+      ]
     },
     {
       "family": "Inconsolata",
@@ -15153,6 +15185,22 @@
         "latin",
         "latin-ext",
         "lisu"
+      ],
+      "axes": []
+    },
+    {
+      "family": "Liter",
+      "weights": {
+        "roman": [
+          400
+        ],
+        "italic": []
+      },
+      "subsets": [
+        "menu",
+        "cyrillic",
+        "latin",
+        "latin-ext"
       ],
       "axes": []
     },
@@ -21920,6 +21968,31 @@
       ]
     },
     {
+      "family": "Noto Serif Hentaigana",
+      "weights": {
+        "roman": [
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900
+        ],
+        "italic": []
+      },
+      "subsets": [
+        "menu",
+        "kana-extended",
+        "latin",
+        "latin-ext"
+      ],
+      "axes": [
+        "wght"
+      ]
+    },
+    {
       "family": "Noto Serif JP",
       "weights": {
         "roman": [
@@ -22439,6 +22512,22 @@
       "axes": [
         "wght"
       ]
+    },
+    {
+      "family": "Noto Serif Todhri",
+      "weights": {
+        "roman": [
+          400
+        ],
+        "italic": []
+      },
+      "subsets": [
+        "menu",
+        "latin",
+        "latin-ext",
+        "todhri"
+      ],
+      "axes": []
     },
     {
       "family": "Noto Serif Toto",
@@ -25980,6 +26069,22 @@
       "axes": [
         "wght"
       ]
+    },
+    {
+      "family": "Pochaevsk",
+      "weights": {
+        "roman": [
+          400
+        ],
+        "italic": []
+      },
+      "subsets": [
+        "menu",
+        "cyrillic",
+        "cyrillic-ext",
+        "latin"
+      ],
+      "axes": []
     },
     {
       "family": "Podkova",
@@ -32357,6 +32462,22 @@
         "japanese",
         "latin",
         "latin-ext"
+      ],
+      "axes": []
+    },
+    {
+      "family": "Triodion",
+      "weights": {
+        "roman": [
+          400
+        ],
+        "italic": []
+      },
+      "subsets": [
+        "menu",
+        "cyrillic",
+        "cyrillic-ext",
+        "latin"
       ],
       "axes": []
     },

@@ -16,6 +16,10 @@ export default async function generateFontStatsJson(
     (font) => font.axes.length > 0
   ).length;
 
+  const numberOfLatinSubsetFonts = fontData.filter((font) =>
+    font.subsets.includes("latin")
+  ).length;
+
   const subsets = Array.from(
     new Set(fontData.flatMap((font) => font.subsets))
   ).sort();
@@ -32,6 +36,7 @@ export default async function generateFontStatsJson(
     stats: {
       numberOfGoogleFonts,
       numberOfVariableFonts,
+      numberOfLatinSubsetFonts,
       subsets,
       axes,
     },

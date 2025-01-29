@@ -1,11 +1,12 @@
 {
   "metadata": {
-    "generatedOn": "21-01-25",
+    "generatedOn": "29-01-25",
     "description": "This file contains stats on fontData from 'https://fonts.google.com/metadata/fonts'"
   },
   "stats": {
-    "numberOfGoogleFonts": 1790,
-    "numberOfVariableFonts": 458,
+    "numberOfGoogleFonts": 1796,
+    "numberOfVariableFonts": 461,
+    "numberOfLatinSubsetFonts": 1673,
     "subsets": [
       "adlam",
       "ahom",
@@ -68,6 +69,7 @@
       "japanese",
       "javanese",
       "kaithi",
+      "kana-extended",
       "kannada",
       "kawi",
       "kayah-li",
@@ -171,6 +173,7 @@
       "tibetan",
       "tifinagh",
       "tirhuta",
+      "todhri",
       "toto",
       "ugaritic",
       "vai",
