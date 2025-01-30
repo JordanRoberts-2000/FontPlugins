@@ -49,4 +49,7 @@ export const googleFontSchema = z
     return null;
   });
 
+export const googleFontsSchema = z.array(googleFontSchema).optional();
+
 export type GoogleFont = z.infer<typeof googleFontSchema>;
+export type GoogleFonts = z.infer<typeof googleFontsSchema>;

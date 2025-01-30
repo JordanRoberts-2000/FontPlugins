@@ -2,17 +2,22 @@ export const pluginConfig = {
   googleFonts: [
     {
       font: "ABeeZee",
+
+      weights: "allSupportedWieghts",
+      italics: "allSupportedItalics",
+      variable: true, // | ["allAxes"]
+
+      selfHost: false,
+      includeAdjustedFallback: false,
+
       className: "classname",
       cssVariable: "--serif",
-      includeAdjustedFallback: false,
+
       fallback: "customFallback",
       display: "swap",
-      selfHost: true,
-      optimize: true,
-      weights: ["allSupportedWeights", "variable"],
-      includeItalics: "allSupportedItalics",
       subsets: "allSubsets",
-      axes: ["allAxes"],
+
+      // what if defer and preload contain the same values?
       preload: {
         // boolean, useful for variable
         italic: [],

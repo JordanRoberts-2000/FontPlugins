@@ -1,8 +1,6 @@
-import { SUBSET_FALLBACK_ARRAY } from "../constants/index.js";
 import { CSS_METHODS } from "../../../../shared/constants.js";
-import { GlobalSettings } from "../schemas/settings/settings.schema.js";
 
-const defaultSettings: GlobalSettings = {
+const defaultSettings = {
   disable: false,
   preload: false,
   display: "swap" as const,
@@ -26,9 +24,8 @@ const defaultSettings: GlobalSettings = {
     includeItalicsByDefault: undefined,
 
     preconnect: true,
-    suppressNotOpenSourceWarnings: true,
     adjustedFallback: true,
-    fallbackSubsets: SUBSET_FALLBACK_ARRAY,
+    fallbackSubsets: undefined,
 
     selfHost: {
       enabled: undefined,

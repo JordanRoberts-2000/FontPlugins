@@ -1,4 +1,5 @@
-import { WEIGHT_MAP } from "../../../../shared/constants.js";
+import { numberToWeight } from "../../../../shared/constants.js";
+import type { WeightNumber } from "../../../../shared/types.js";
 import type { FontData } from "../../fontMetaData/fontMetaData.schema.js";
 
 export default function generateFontTypes(fontData: FontData) {
@@ -12,8 +13,8 @@ export default function generateFontTypes(fontData: FontData) {
     fontConfigType += `
     | (GoogleFontSharedOptions & {
         font: "${family}",${generateWeights(roman, axes)}${generateItalics(
-      italic
-    )}${generateField(subsets, "subsets")}${generateField(axes, "axes")}
+          italic
+        )}${generateField(subsets, "subsets")}${generateField(axes, "axes")}
   })`;
   });
 
@@ -31,13 +32,13 @@ type GoogleFonts = Array<${fontConfigType} ${fontTitlesType}>;
 `;
 }
 
-function generateWeights(roman: number[], axes: string[]) {
+function generateWeights(roman: WeightNumber[], axes: string[]) {
   if (roman.length === 0) {
     return `${axes.length > 0 ? '\n\t\t\t\tweight?: "variable,"' : ""}`;
   }
 
   const weightOptions = roman
-    .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+    .map((num) => `"${numberToWeight[num]}" | ${num}`)
     .join(" | ");
 
   return `\n\t\t\t\tweight?: "allSupportedWeights"${
@@ -45,32 +46,32 @@ function generateWeights(roman: number[], axes: string[]) {
   } | ${weightOptions} | Array<${weightOptions}>${
     roman.length > 1
       ? ` | { min: ${roman
-          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+          .map((num) => `"${numberToWeight[num]}" | ${num}`)
           .slice(0, -1)
           .join(" | ")}, max: ${roman
-          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+          .map((num) => `"${numberToWeight[num]}" | ${num}`)
           .slice(1)
           .join(" | ")} }`
       : ""
   }`;
 }
 
-function generateItalics(italics: number[]) {
+function generateItalics(italics: WeightNumber[]) {
   if (italics.length === 0) {
     return ``;
   }
 
   const italicOptions = italics
-    .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+    .map((num) => `"${numberToWeight[num]}" | ${num}`)
     .join(" | ");
 
   return `\n\t\t\t\titalic?: "allSupportedWeights" | boolean | ${italicOptions} | Array<${italicOptions}>${
     italics.length > 1
       ? ` | { min: ${italics
-          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+          .map((num) => `"${numberToWeight[num]}" | ${num}`)
           .slice(0, -1)
           .join(" | ")}, max: ${italics
-          .map((num) => `"${WEIGHT_MAP[num]}" | ${num}`)
+          .map((num) => `"${numberToWeight[num]}" | ${num}`)
           .slice(1)
           .join(" | ")} }`
       : ""

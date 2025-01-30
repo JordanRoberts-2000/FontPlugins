@@ -19,13 +19,12 @@ export const fontConfig = {
     google: {
       disable: false,
       preconnect: true,
-      suppressNotOpenSourceWarnings: true,
+
       adjustedFallback: true,
       includeItalicsByDefault: true,
       preload: true,
       subset: "latin",
       display: "auto",
-      fallbackSubsets: ["latin", "latin-ext", "cyrillic"],
       selfHost: {
         enabled: true,
         extractUnicodeRange: true,
@@ -76,15 +75,18 @@ export const fontConfig = {
   googleFonts: [
     {
       font: "ABeeZee",
+      weights: ["allSupportedWieghts", "variable"],
+      includeItalics: "allSupportedItalics",
+
       className: "classname",
       cssVariable: "--serif",
+
       includeAdjustedFallback: false,
       fallback: "customFallback",
       display: "swap",
-      weights: ["allSupportedWieghts", "variable"],
-      includeItalics: "allSupportedItalics",
       subsets: "allSubsets",
       axes: ["allAxes"],
+
       preload: {
         // boolean, useful for variable
         italic: [],

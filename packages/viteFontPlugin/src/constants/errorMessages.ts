@@ -1,7 +1,7 @@
 const ERRORS = {
   zod: {
     ensureDefault: (
-      value: string,
+      value: unknown,
       path: string[],
       defaultVal: String,
       err: string

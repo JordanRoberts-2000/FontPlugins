@@ -4,6 +4,7 @@ import generateFontDataJson from "./utils/generateFiles/fontJson/jsonFontData.ge
 import generateFontDataMap from "./utils/generateFiles/fontMap/fontDataMap.generate.js";
 import generateFontStatsJson from "./utils/generateFiles/fontJson/jsonFontStats.generate.js";
 import generatePluginConfigType from "./utils/generateFiles/fontTypes/pluginType.generate.js";
+import generateZodSchema from "./utils/generateFiles/fontSchema/googleFonts.generate.schema.js";
 
 export const scriptPrefix = "[Script - GeneratePluginConfigType]";
 
@@ -17,6 +18,10 @@ const fontsMetaDataJSON = await attemptFetch({
 });
 
 const fontData = parseFontMetaData(fontsMetaDataJSON);
+
+await generateZodSchema(fontData, [
+  "packages/viteFontPlugin/src/schemas/fonts/google",
+]);
 
 await generateFontStatsJson(fontData, ["data"]);
 

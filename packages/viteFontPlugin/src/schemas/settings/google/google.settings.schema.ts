@@ -5,14 +5,14 @@ import { optimizeSchema } from "../../shared/optimize.schema.js";
 import removeDuplicates from "../../../lib/zod/removeDuplicates.js";
 
 export const googleSettingsSchema = fontSettingsSchema
+  .partial()
   .omit({ unicodeRange: true })
   .extend({
     preconnect: z.boolean(),
-    suppressNotOpenSourceWarnings: z.boolean(),
     adjustedFallback: z.boolean(),
     fallbackSubsets: removeDuplicates(z.array(z.enum(SUBSETS_OPTIONS)), {
       warn: true,
-    }),
+    }).optional(),
     selfHost: optimizeSchema.omit({ convertToWoff2: true }),
   });
 

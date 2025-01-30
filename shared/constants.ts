@@ -1,14 +1,26 @@
-export const WEIGHT_MAP: Record<number, string> = {
-  100: "Thin",
-  200: "Extra Light",
-  300: "Light",
-  400: "Normal",
-  500: "Medium",
-  600: "Semi Bold",
-  700: "Bold",
-  800: "Extra Bold",
-  900: "Black",
-};
+import type { WeightNumber, WeightName } from "./types.js";
+
+export const WEIGHT_DEFINITIONS = [
+  [100, "Thin"],
+  [200, "Extra Light"],
+  [300, "Light"],
+  [400, "Normal"],
+  [500, "Medium"],
+  [600, "Semi Bold"],
+  [700, "Bold"],
+  [800, "Extra Bold"],
+  [900, "Black"],
+] as const;
+
+export const numberToWeight: Record<WeightNumber, WeightName> =
+  Object.fromEntries(WEIGHT_DEFINITIONS) as Record<WeightNumber, WeightName>;
+
+export const weightToNumber = Object.fromEntries(
+  WEIGHT_DEFINITIONS.map(([num, weight]) => [weight, num])
+) as Record<
+  (typeof WEIGHT_DEFINITIONS)[number][1],
+  (typeof WEIGHT_DEFINITIONS)[number][0]
+>;
 
 export const CSS_METHODS = ["inlineHead", "externalBuildFiles"] as const;
 

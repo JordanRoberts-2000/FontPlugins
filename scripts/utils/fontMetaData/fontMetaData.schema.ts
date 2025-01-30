@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { WeightNumber } from "../../../shared/types.js";
 
 export const FontsMetadataSchema = z.object({
   familyMetadataList: z.array(
@@ -11,13 +12,16 @@ export const FontsMetadataSchema = z.object({
           return keys.reduce(
             (acc, key) => {
               if (key.endsWith("i")) {
-                acc.italic.push(parseInt(key.slice(0, -1)));
+                acc.italic.push(parseInt(key.slice(0, -1)) as WeightNumber);
               } else {
-                acc.roman.push(parseInt(key));
+                acc.roman.push(parseInt(key) as WeightNumber);
               }
               return acc;
             },
-            { roman: [], italic: [] } as { roman: number[]; italic: number[] }
+            { roman: [], italic: [] } as {
+              roman: WeightNumber[];
+              italic: WeightNumber[];
+            }
           );
         }),
         axes: z
